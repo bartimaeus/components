@@ -1,0 +1,47 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
+import Editor from './editor.example'
+
+<Meta title="Form Helpers|Editor" component={Editor} />
+
+# Editor
+
+Editor is a wysiwyg text editor using **draft-js**.
+
+### How to Use
+
+Editor requires two properties **value** _(string)_ and **onChange** _(function)_.
+
+```jsx
+const Form = props => {
+  const [value, onChange] = useState()
+  const save = async () => {
+    await props.onSave({ text: value })
+  }
+
+  return (
+    <form onSubmit={save}>
+      <Editor value={value} onChange={onChange} />
+      <button onClick={save}>Save</button>
+    </form>
+  )
+}
+```
+
+### Examples
+
+<Preview>
+  <Story name="Editor">
+    <Editor
+      value='<h1>Hello<span style="font-family: Tahoma;"> world!</span></h1>'
+      onChange={value => console.log(value)}
+    />
+  </Story>
+</Preview>
+
+### Props
+
+| Property          | Description                                                                                                                                                                                                      | Type                 | Required   | Default |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------- | ------- |
+| **value**         | The **initial value** of the Editor. Once the Editor has mounted the content is managed by internal state. **onChange** is needed to help the parent react component keep track of the changing state of Editor. | `string`             | `required` |         |
+| **onChange**      | Allows the parent react component to know the internal state of Editor.                                                                                                                                          | `Function(value)`    | `required` |         |
+| **onImageUpload** | Allows parent react component to know the response from uploading image in Editor.                                                                                                                               | `Function(response)` |            |         |

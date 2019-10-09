@@ -1,0 +1,23 @@
+.ant-form-item.is-checkbox
+  .has-success.has-feedback
+  .ant-form-item-children-icon,
+.ant-form-item.is-checkbox
+  .has-warning.has-feedback
+  .ant-form-item-children-icon,
+.ant-form-item.is-checkbox .has-error.has-feedback .ant-form-item-children-icon,
+.ant-form-item.is-checkbox
+  .is-validating.has-feedback
+  .ant-form-item-children-icon {
+  position: relative;
+  top: 0;
+  margin-top: 0;
+  line-height: normal;
+}
+
+.ant-form-item.is-checkbox {
+  margin-bottom: 0;
+}
+
+.ant-form-item.ant-form-item-no-margin {
+  margin: 0;
+}
