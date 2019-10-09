@@ -1,6 +1,6 @@
 {
   "name": "@bartimaeus/components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React components used by my personal projects",
   "author": "Eric Shelley <eric@webdesignbakery.com>",
   "license": "MIT",
@@ -76,6 +76,9 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^2.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   },
   "files": [
     "dist"
