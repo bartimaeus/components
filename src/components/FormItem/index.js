@@ -8,7 +8,7 @@ import 'antd/dist/antd.css'
 import './style.css'
 
 // Components
-import Field from '../Field'
+import FormField from '../FormField'
 
 const LabelWrapper = styled.div`
   display: ${props => get(props, 'style.display', 'block')};
@@ -116,7 +116,7 @@ const FormItem = ({
       {...validationProps}
     >
       {!noLabel && labelTop && <Label style={labelStyle}>{label}</Label>}
-      <Field
+      <FormField
         allowSearch={allowSearch}
         className={klassName}
         disabled={disabled}
