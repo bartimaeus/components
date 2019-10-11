@@ -11,10 +11,7 @@ import {
 } from 'antd'
 import moment from 'moment'
 import styled from '@emotion/styled'
-import 'antd/es/checkbox/style/index.css'
-import 'antd/es/date-picker/style/index.css'
-import 'antd/es/input/style/index.css'
-import 'antd/es/input-number/style/index.css'
+import 'antd/dist/antd.css'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 // Helpers
@@ -289,6 +286,26 @@ const Field = ({
         <EditorWrapper>
           <Editor value={value} onChange={onChange} />
         </EditorWrapper>
+      )
+    case 'area':
+      return (
+        // <AreaWrapper>
+        <Input.TextArea
+          {...input}
+          addonAfter={addonAfter}
+          addonBefore={addonBefore}
+          className={className}
+          disabled={disabled}
+          maxLength={maxLength}
+          onPressEnter={onPressEnter}
+          placeholder={placeholder || label}
+          prefix={prefix || null}
+          required={required}
+          size={size}
+          style={style}
+          type={inputType}
+          />
+          // </AreaWrapper>
       )
     case 'time':
       return (
