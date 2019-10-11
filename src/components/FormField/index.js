@@ -46,12 +46,13 @@ const EditorWrapper = styled.div`
 `
 
 const { Option } = Select
-const Field = ({
+const FormField = ({
   addonAfter,
   addonBefore,
   allowSearch,
   ajaxSelect,
   autosize,
+  checkboxType,
   className,
   disabled,
   formatter,
@@ -77,8 +78,9 @@ const Field = ({
   ...restProps
 }) => {
   const { onChange, value } = input
+  const fieldType = checkboxType || input.type || type
 
-  switch (input.type || type) {
+  switch (fieldType) {
     case 'checkbox':
       return (
         <Checkbox
@@ -359,12 +361,13 @@ const Field = ({
   }
 }
 
-Field.defaultProps = {
+FormField.defaultProps = {
   addonAfter: undefined,
   addonBefore: undefined,
   allowSearch: false,
   ajaxSelect: false,
   autosize: false,
+  checkboxType: undefined,
   className: undefined,
   disabled: false,
   formatter: undefined,
@@ -388,12 +391,13 @@ Field.defaultProps = {
   type: 'text',
 }
 
-Field.propTypes = {
+FormField.propTypes = {
   addonAfter: PropTypes.node,
   addonBefore: PropTypes.node,
   allowSearch: PropTypes.bool,
   ajaxSelect: PropTypes.bool,
   autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  checkboxType: PropTypes.string,
   className: PropTypes.string,
   disabled: PropTypes.bool,
   help: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
@@ -418,4 +422,4 @@ Field.propTypes = {
   type: PropTypes.string,
 }
 
-export default Field
+export default FormField

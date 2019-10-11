@@ -3,6 +3,7 @@ import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
 
 import FormField from './index'
+import PrettyProps from '../PrettyProps'
 import { initialValues } from './formField.example'
 
 <Meta title="Form Helpers|FormField" component={FormField} />
@@ -238,11 +239,116 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 ### Password
 
+`type="password"`
+
+<Preview>
+  <Story name="Password">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="confirmPassword"
+              type="password"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
 ### Radio
+
+`type="checkbox"`, `checkboxType="radio"`, and `options={[{value: 1, label: 'one'}, ...]}`
+
+<Preview>
+  <Story name="Radio">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="numberOfKids"
+              options={[
+                { value: 1, label: 'one' },
+                { value: 2, label: 'two' },
+                { value: 3, label: 'three' },
+              ]}
+              type="checkbox"
+              checkboxType="radio"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
 
 ### Rating
 
+`type="rating"` and `options={[{value: 1, label: 'one'}, ...]}`
+
+<Preview>
+  <Story name="Rating">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="levelOfPain"
+              options={[
+                { value: 1, label: 'Meh' },
+                { value: 2, label: 'So, so' },
+                { value: 3, label: '@#$%' },
+              ]}
+              type="rating"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
 ### Select
+
+`type="select"` and `options={[{value: 1, label: 'one'}, ...]}`
+
+<Preview>
+  <Story name="Select">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="bestPizza"
+              options={[
+                { value: 1, label: 'Dominos' },
+                { value: 2, label: 'Pizza Hut' },
+                { value: 3, label: 'Little Caesars' },
+                { value: 4, label: 'The Pie Pizzeria' },
+              ]}
+              type="select"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
 
 ### Textarea
 
@@ -266,7 +372,43 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 ### Time
 
+`type="time"`
+
+<Preview>
+  <Story name="Time">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="timeOfDay" type="time" />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
 ### YesNo
+
+`type="yes_no"`
+
+<Preview>
+  <Story name="Yes/No">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="doYouLikeSushi" type="yes_no" />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
 
 ## Props
 
