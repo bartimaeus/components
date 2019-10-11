@@ -1,5 +1,7 @@
 # React Components
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/85293c24-5220-4195-8cf8-e1fd2013bf85/deploy-status)](https://app.netlify.com/sites/bartimaeus-components/deploys)
+
 I often find myself using [Ant Design](https://github.com/ant-design/ant-design) and customizing it a bit for my needs. Creating a repo of shared React components for use in my personal projects.
 
 ## Usage
