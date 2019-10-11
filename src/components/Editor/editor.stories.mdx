@@ -1,5 +1,6 @@
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
-import Editor from './editor.example'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+
+import Editor from './index'
 
 <Meta title="Form Helpers|Editor" component={Editor} />
 
@@ -7,7 +8,7 @@ import Editor from './editor.example'
 
 Editor is a wysiwyg text editor using **draft-js**.
 
-### How to Use
+## Usage
 
 Editor requires two properties **value** _(string)_ and **onChange** _(function)_.
 
@@ -27,7 +28,7 @@ const Form = props => {
 }
 ```
 
-### Examples
+## Examples
 
 <Preview>
   <Story name="Editor">
@@ -38,10 +39,6 @@ const Form = props => {
   </Story>
 </Preview>
 
-### Props
+## Props
 
-| Property          | Description                                                                                                                                                                                                      | Type                 | Required   | Default |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------- | ------- |
-| **value**         | The **initial value** of the Editor. Once the Editor has mounted the content is managed by internal state. **onChange** is needed to help the parent react component keep track of the changing state of Editor. | `string`             | `required` |         |
-| **onChange**      | Allows the parent react component to know the internal state of Editor.                                                                                                                                          | `Function(value)`    | `required` |         |
-| **onImageUpload** | Allows parent react component to know the response from uploading image in Editor.                                                                                                                               | `Function(response)` |            |         |
+<Props of={Editor} />

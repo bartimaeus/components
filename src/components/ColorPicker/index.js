@@ -65,7 +65,12 @@ ColorPicker.defaultProps = {
 }
 
 ColorPicker.propTypes = {
+  /** Allows color picker to be view-only */
+  disabled: PropTypes.bool,
+  /** object includes value (string) and onChange (function). input prop is automatically passed with react-final-form's <Field> component */
   input: PropTypes.object.isRequired,
+  /** Style object allows the container of the color picker to be styled */
+  style: PropTypes.object,
 }
 
 export default ColorPicker

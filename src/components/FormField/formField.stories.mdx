@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
 
 import FormField from './index'
@@ -412,9 +412,4 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 ## Props
 
-| Property     | Description                                                                                                                                               | Type     | Required   | Default |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------- |
-| **input**    | `input` is an object passed by **react-final-form**'s `Field` component. The `input` object contains a **value** string and **onChange** function.        | `string` | `required` |         |
-| meta         | `meta` is an object passed by **react-final-form**'s `Field` component. The `meta` object contains properties like **error**.                             | `string` |            | `{}`    |
-| type         | A string value that tells `FormItem` which type of component to return.                                                                                   | `string` |            | `text`  |
-| ...restProps | Additional props are supported based on the component type. Please see [Ant Design](https://ant.design/docs/react/introduce) docs for additional details. |          |            |         |
+<Props of={FormField} />
