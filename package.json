@@ -19,7 +19,7 @@
     "start:rollup": "rollup -c -w",
     "prepublish": "yarn run build",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -c .storybook -o public"
   },
   "sideEffects": true,
   "peerDependencies": {
