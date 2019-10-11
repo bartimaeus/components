@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
 
@@ -44,20 +45,22 @@ const Form = props => {
 
 <Preview>
   <Story name="Checkbox">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field
-            component={FormField}
-            name="agree"
-            label="I agree to the 'terms of service'"
-            type="checkbox"
-          />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="agree"
+              label="I agree to the 'terms of service'"
+              type="checkbox"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -67,15 +70,17 @@ const Form = props => {
 
 <Preview>
   <Story name="ColorPicker">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="color" type="color-picker" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="color" type="color-picker" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -87,15 +92,17 @@ const Form = props => {
 
 <Preview>
   <Story name="Date">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="createdAt" type="date" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="createdAt" type="date" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -105,15 +112,17 @@ const Form = props => {
 
 <Preview>
   <Story name="Editor">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="message" type="textarea" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="message" type="editor" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -127,15 +136,17 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 <Preview>
   <Story name="Default">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="name" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="name" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -147,15 +158,17 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 <Preview>
   <Story name="Input">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="name" type="text" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="name" type="text" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
@@ -165,21 +178,63 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 <Preview>
   <Story name="Month">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="monthInQuestion" type="month" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="monthInQuestion" type="month" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
 ### Number
 
+`type="number"`
+
+<Preview>
+  <Story name="Number">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormField}
+              name="daysOfEatingKeto"
+              type="number"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
 ### Phone
+
+`type="phone"`
+
+<Preview>
+  <Story name="Phone">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="phoneNumber" type="phone" />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
 
 ### Password
 
@@ -195,15 +250,17 @@ If `type` is not specicied the default component returned from `FormField` is a 
 
 <Preview>
   <Story name="Textarea">
-    <Form
-      initialValues={initialValues}
-      onSubmit={() => {}}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <Field component={FormField} name="message" type="textarea" />
-        </form>
-      )}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormField} name="message" type="textarea" />
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
