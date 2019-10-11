@@ -1,5 +1,6 @@
-import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
-import ColorPicker from './color-picker.example'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+
+import ColorPicker from './index'
 
 <Meta title="Form Helpers|ColorPicker" component={ColorPicker} />
 
@@ -7,7 +8,7 @@ import ColorPicker from './color-picker.example'
 
 ColorPicker is a way to allow a user to select a color graphically.
 
-### How to Use
+## Usage
 
 ColorPicker requires an **input** object prop with two properties **value** _(string)_ and **onChange** _(function)_.
 
@@ -27,16 +28,19 @@ const Form = props => {
 }
 ```
 
-### Example
+## Example
 
 <Preview>
-  <Story name="ColorPicker">
-    <ColorPicker />
+  <Story name="ColorPicker" style={{ padding: 25 }}>
+    <div>
+      <label style={{ display: 'inline-block', marginBottom: 4 }}>
+        Select Color:
+      </label>
+      <ColorPicker input={{ value: '4a90e2', onChange: () => {} }} />
+    </div>
   </Story>
 </Preview>
 
-### Props
+## Props
 
-| Property  | Description                                                                                                 | Type     | Required   | Default |
-| --------- | ----------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------- |
-| **input** | Object containing two properties **value** (hex color value of the ColorPicker) and **onChange** (function) | `object` | `required` |         |
+<Props of={ColorPicker} />
