@@ -302,7 +302,7 @@ const Field = ({
           size={size}
           style={style}
           type={inputType}
-          />
+        />
       )
     case 'time':
       return (
@@ -403,7 +403,7 @@ Field.propTypes = {
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   max: PropTypes.number,
   maxLength: PropTypes.number,
-  meta: PropTypes.object.isRequired,
+  meta: PropTypes.object,
   min: PropTypes.number,
   multiSelect: PropTypes.bool,
   onPressEnter: PropTypes.func,

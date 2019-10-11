@@ -1,7 +1,7 @@
 export { default as Button } from './components/Button'
 export { default as ColorPicker } from './components/ColorPicker'
 export { default as Editor } from './components/Editor/index'
-export { default as Field } from './components/Field'
+export { default as FormField } from './components/FormField'
 export { default as FormItem } from './components/FormItem'
 export { H1, H2, H3, H4, H5, H6 } from './components/Headings/index'
 export { default as PrettyProps } from './components/PrettyProps'

@@ -1,0 +1,221 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
+import { Form, Field } from 'react-final-form'
+
+import FormField from './index'
+import { initialValues } from './formField.example'
+
+<Meta title="Form Helpers|FormField" component={FormField} />
+
+# FormField
+
+Field is a higher order component that will render custom form inputs based on the `type` prop passed to Field.
+
+## Usage
+
+We use `FormField` alongside **react-final-form**. `FormField` requires two properties **input** _(object)_ and **meta** _(object)_ which are both supplied by default if using **react-final-form**'s `Field` component.
+
+**Also**, `FormField` supports any applicable **antd** fields for the give form component type.
+
+```jsx
+import { Form, Field } from 'react-final-form'
+
+const Form = props => {
+  const [user, updateUser] = useState({})
+  const save = values => updateUser(values)
+
+  return (
+    <Form
+      initialValues={{ name: 'Barry Allen' }}
+      onSubmit={save}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="name" type="text" />
+          <button onClick={handleSubmit}>Save</button>
+        </form>
+      )}
+    />
+  )
+}
+```
+
+### Checkbox
+
+`type="checkbox"`
+
+<Preview>
+  <Story name="Checkbox">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field
+            component={FormField}
+            name="agree"
+            label="I agree to the 'terms of service'"
+            type="checkbox"
+          />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### ColorPicker
+
+`type="color-picker"`
+
+<Preview>
+  <Story name="ColorPicker">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="color" type="color-picker" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+**NOTE** the color value needs to be a hex without the **#**.
+
+### Date
+
+`type="date"`
+
+<Preview>
+  <Story name="Date">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="createdAt" type="date" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### Editor
+
+`type="editor"` will return a WYSIWYG text editor using **draft-js-wysiwyg**.
+
+<Preview>
+  <Story name="Editor">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="message" type="textarea" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### Input
+
+If `type` is not specicied the default component returned from `FormField` is a basic text input.
+
+```jsx
+<Field component={FormField} name="name" />
+```
+
+<Preview>
+  <Story name="Default">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="name" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+`type="text"`
+
+```jsx
+<Field component={FormField} name="name" type="text" />
+```
+
+<Preview>
+  <Story name="Input">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="name" type="text" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### Month
+
+`type="month"`
+
+<Preview>
+  <Story name="Month">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="monthInQuestion" type="month" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### Number
+
+### Phone
+
+### Password
+
+### Radio
+
+### Rating
+
+### Select
+
+### Textarea
+
+`type="textarea"`
+
+<Preview>
+  <Story name="Textarea">
+    <Form
+      initialValues={initialValues}
+      onSubmit={() => {}}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field component={FormField} name="message" type="textarea" />
+        </form>
+      )}
+    />
+  </Story>
+</Preview>
+
+### Time
+
+### YesNo
+
+## Props
+
+| Property     | Description                                                                                                                                               | Type     | Required   | Default |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- | ------- |
+| **input**    | `input` is an object passed by **react-final-form**'s `Field` component. The `input` object contains a **value** string and **onChange** function.        | `string` | `required` |         |
+| meta         | `meta` is an object passed by **react-final-form**'s `Field` component. The `meta` object contains properties like **error**.                             | `string` |            | `{}`    |
+| type         | A string value that tells `FormItem` which type of component to return.                                                                                   | `string` |            | `text`  |
+| ...restProps | Additional props are supported based on the component type. Please see [Ant Design](https://ant.design/docs/react/introduce) docs for additional details. |          |            |         |
