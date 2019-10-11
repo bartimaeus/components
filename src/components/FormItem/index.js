@@ -4,7 +4,7 @@ import { Form } from 'antd'
 import { get, isEmpty } from 'lodash'
 import classNames from 'classnames'
 import styled from '@emotion/styled'
-import 'antd/es/form/style/index.css'
+import 'antd/dist/antd.css'
 import './style.css'
 
 // Components

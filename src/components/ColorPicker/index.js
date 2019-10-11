@@ -4,6 +4,7 @@ import { SketchPicker } from 'react-color'
 import { Input, Popover } from 'antd'
 import styled from '@emotion/styled'
 import 'antd/es/input/style/index.css'
+import 'antd/es/popover/style/index.css'
 
 const ColorPreview = styled(Input)`
   background-color: ${({ color }) => (color === 'ffffff' ? 'ccccc' : color)};

@@ -51,6 +51,7 @@ const Field = ({
   addonBefore,
   allowSearch,
   ajaxSelect,
+  autosize,
   className,
   disabled,
   formatter,
@@ -108,6 +109,12 @@ const Field = ({
           />
           {info}
         </>
+      )
+    case 'editor':
+      return (
+        <EditorWrapper>
+          <Editor value={value} onChange={onChange} />
+        </EditorWrapper>
       )
     case 'month':
       const { MonthPicker } = DatePicker
@@ -283,20 +290,11 @@ const Field = ({
       )
     case 'textarea':
       return (
-        <EditorWrapper>
-          <Editor value={value} onChange={onChange} />
-        </EditorWrapper>
-      )
-    case 'area':
-      return (
-        // <AreaWrapper>
         <Input.TextArea
           {...input}
-          addonAfter={addonAfter}
-          addonBefore={addonBefore}
+          autosize={autosize}
           className={className}
           disabled={disabled}
-          maxLength={maxLength}
           onPressEnter={onPressEnter}
           placeholder={placeholder || label}
           prefix={prefix || null}
@@ -305,7 +303,6 @@ const Field = ({
           style={style}
           type={inputType}
           />
-          // </AreaWrapper>
       )
     case 'time':
       return (
@@ -367,6 +364,7 @@ Field.defaultProps = {
   addonBefore: undefined,
   allowSearch: false,
   ajaxSelect: false,
+  autosize: false,
   className: undefined,
   disabled: false,
   formatter: undefined,
@@ -395,6 +393,7 @@ Field.propTypes = {
   addonBefore: PropTypes.node,
   allowSearch: PropTypes.bool,
   ajaxSelect: PropTypes.bool,
+  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   className: PropTypes.string,
   disabled: PropTypes.bool,
   help: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
