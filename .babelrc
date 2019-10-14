@@ -9,6 +9,7 @@
     "@babel/react"
   ],
   "plugins": [
+    "react-docgen",
     "@babel/plugin-proposal-class-properties",
     "@babel/transform-react-jsx"
   ]

@@ -392,33 +392,61 @@ FormField.defaultProps = {
 }
 
 FormField.propTypes = {
+  /** The label text displayed after (on the right side of) the input field. */
   addonAfter: PropTypes.node,
+  /** The label text displayed before (on the left side of) the input field. */
   addonBefore: PropTypes.node,
+  /** Show clear button when type is 'select'. */
   allowSearch: PropTypes.bool,
+  /** Allow Select to fetch options dynamically through onSearch function. */
   ajaxSelect: PropTypes.bool,
+  /** */
   autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  /** */
   checkboxType: PropTypes.string,
+  /** */
   className: PropTypes.string,
+  /** */
   disabled: PropTypes.bool,
+  /** */
   help: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   info: PropTypes.node,
+  /** */
   input: PropTypes.object.isRequired,
+  /** */
   inputType: PropTypes.string,
+  /** */
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   max: PropTypes.number,
+  /** */
   maxLength: PropTypes.number,
+  /** */
   meta: PropTypes.object,
+  /** */
   min: PropTypes.number,
+  /** */
   multiSelect: PropTypes.bool,
+  /** */
   onPressEnter: PropTypes.func,
+  /** */
   onSearch: PropTypes.func,
+  /** */
   options: PropTypes.any,
+  /** */
   parser: PropTypes.func,
+  /** */
   placeholder: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   prefix: PropTypes.node,
+  /** */
   required: PropTypes.bool,
+  /** */
   size: PropTypes.string,
+  /** */
   style: PropTypes.object,
+  /** */
   type: PropTypes.string,
 }
 

@@ -91,9 +91,13 @@ class RichTextEditor extends React.Component {
 // };
 
 RichTextEditor.propTypes = {
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  /** Content of the editor. Content may contain allowable HTML tags */
+  value: PropTypes.string.isRequired,
+  /** Function that updates the value prop */
+  onChange: PropTypes.func.isRequired,
+  /** Function to call after image has been uploaded through Editor */
   onImageUpload: PropTypes.func,
+  /** Allows Editor to load new value from props; otherwise, Editor state is managed locally after component mounts. */
   resetTrigger: PropTypes.any,
 }
 
