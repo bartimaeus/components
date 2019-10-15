@@ -292,19 +292,20 @@ const FormField = ({
       )
     case 'textarea':
       return (
-        <Input.TextArea
-          {...input}
-          autosize={autosize}
-          className={className}
-          disabled={disabled}
-          onPressEnter={onPressEnter}
-          placeholder={placeholder || label}
-          prefix={prefix || null}
-          required={required}
-          size={size}
-          style={style}
-          type={inputType}
-        />
+        <>
+          <Input.TextArea
+            {...input}
+            autosize={autosize}
+            className={className}
+            disabled={disabled}
+            onPressEnter={onPressEnter}
+            placeholder={placeholder || label}
+            prefix={prefix || null}
+            required={required}
+            size={size}
+            style={style}
+          />
+        </>
       )
     case 'time':
       return (
