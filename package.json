@@ -84,5 +84,16 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bartimaeus/components.git"
+  },
+  "keywords": [
+    "React"
+  ],
+  "bugs": {
+    "url": "https://github.com/bartimaeus/components/issues"
+  },
+  "homepage": "https://github.com/bartimaeus/components#readme"
 }
