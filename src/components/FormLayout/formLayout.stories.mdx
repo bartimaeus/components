@@ -1,0 +1,215 @@
+import { Suspense } from 'react'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Form, Field } from 'react-final-form'
+
+import FormLayout from './index'
+import FormItem from '../FormItem'
+
+<Meta title="Form Helpers|FormLayout" component={FormLayout} />
+
+# FormLayout
+
+`FormLayout` is an extension of ant design's [Form](https://ant.design/components/form/#Form-Component) component.
+
+## Usage
+
+You can align the controls of a form using the `layout` prop：
+
+- `horizontal` to horizontally align the labels and controls of the fields. (Default)
+
+- `vertical` to vertically align the labels and controls of the fields.
+
+- `inline` to render form fields in one line.
+
+```jsx
+import { Form, Field } from 'react-final-form'
+import { FormItem, FormLayout } from '@bartimaeus/components'
+
+const Form = props => {
+  const [user, updateUser] = useState({})
+  const save = values => updateUser(values)
+
+  return (
+    <Form
+      initialValues={{ first_name: 'Barry', last_name: 'Allen' }}
+      onSubmit={save}
+      render={({ handleSubmit }) => (
+        <FormLayout onSubmit={handleSubmit}>
+          <Field
+            component={FormItem}
+            name="first_name"
+            label="First Name"
+            type="text"
+          />
+          <Field
+            component={FormItem}
+            name="last_name"
+            label="Last Name"
+            type="text"
+          />
+          <button onClick={handleSubmit}>Save</button>
+        </FormLayout>
+      )}
+    />
+  )
+}
+```
+
+### Horizontal Layout
+
+By default the `layout` prop is set to **horizonal**.
+
+<Preview>
+  <Story name="Horizontal Layout">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{}}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <FormLayout onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </FormLayout>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Vertical Layout
+
+Adding prop `layout="vertical"`
+
+<Preview>
+  <Story name="Vertical Layout">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{}}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <FormLayout layout="vertical" onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </FormLayout>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Inline Layout
+
+Add prop `layout="inline"`
+
+<Preview>
+  <Story name="Inline Layout">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{}}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <FormLayout layout="inline" onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </FormLayout>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Colon
+
+By default the `colon` prop is set to **true**.
+
+<Preview>
+  <Story name="Colon">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{}}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <FormLayout onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </FormLayout>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### No Colon
+
+Add prop `colon={false}` allows us to remove the colon from all labels in the form.
+
+<Preview>
+  <Story name="No Colon">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{}}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <FormLayout colon={false} onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </FormLayout>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+## Props
+
+<Props to={FormLayout} />

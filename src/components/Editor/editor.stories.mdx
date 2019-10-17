@@ -13,6 +13,8 @@ Editor is a wysiwyg text editor using **draft-js**.
 Editor requires two properties **value** _(string)_ and **onChange** _(function)_.
 
 ```jsx
+import { Editor } from '@bartimaeus/components'
+
 const Form = props => {
   const [value, onChange] = useState()
   const save = async () => {
@@ -28,7 +30,7 @@ const Form = props => {
 }
 ```
 
-## Examples
+## Example
 
 <Preview>
   <Story name="Editor">
