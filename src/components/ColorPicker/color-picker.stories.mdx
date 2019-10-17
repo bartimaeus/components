@@ -13,6 +13,8 @@ ColorPicker is a way to allow a user to select a color graphically.
 ColorPicker requires an **input** object prop with two properties **value** _(string)_ and **onChange** _(function)_.
 
 ```jsx
+import { ColorPicker } from '@bartimaeus/components'
+
 const Form = props => {
   const [value, onChange] = useState('4a90e2')
   const save = async () => {
