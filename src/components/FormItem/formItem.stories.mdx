@@ -1,0 +1,345 @@
+import { Suspense } from 'react'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Form, Field } from 'react-final-form'
+import isEmpty from 'lodash/isEmpty'
+
+import FormItem from './index'
+import { initialValues } from './formItem.example'
+
+<Meta title="Form Helpers|FormItem" component={FormItem} />
+
+# FormItem
+
+`FormItem` is an extension of ant design's [Form.Item](https://ant.design/components/form/#Form-Item-Component).
+
+## Usage
+
+We use `FormItem` as much as possible when building forms for consistent styling, labels, help and error messages, and validation.
+
+```jsx
+import { Form, Field } from 'react-final-form'
+import { FormItem } from '@bartimaeus/components'
+
+const Form = props => {
+  const [user, updateUser] = useState({})
+  const save = values => updateUser(values)
+
+  return (
+    <Form
+      initialValues={{ first_name: 'Barry', last_name: 'Allen' }}
+      onSubmit={save}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Field
+            component={FormItem}
+            name="first_name"
+            label="First Name"
+            type="text"
+          />
+          <Field
+            component={FormItem}
+            name="last_name"
+            label="Last Name"
+            type="text"
+          />
+          <button onClick={handleSubmit}>Save</button>
+        </form>
+      )}
+    />
+  )
+}
+```
+
+### Label
+
+Add prop `label="Label"`
+
+<Preview>
+  <Story name="Label">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Label Top
+
+Add prop `labelTop`
+
+<Preview>
+  <Story name="Label Top">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              labelTop
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              labelTop
+              type="text"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### No Label
+
+Add prop `noLabel`
+
+<Preview>
+  <Story name="No Label">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={initialValues}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormItem} name="first_name" noLabel type="text" />
+            <Field component={FormItem} name="last_name" noLabel type="text" />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Required
+
+Add prop `required`
+
+<Preview>
+  <Story name="Required">
+    <Suspense fallback={null}>
+      <Form
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="first_name"
+              label="First Name"
+              required
+              type="text"
+            />
+            <Field
+              component={FormItem}
+              name="last_name"
+              label="Last Name"
+              type="text"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Help
+
+Add `help="helpful feedback for user"` prop
+
+<Preview>
+  <Story name="Help">
+    <Suspense fallback={null}>
+      <Form
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="phone"
+              label="Phone"
+              help="phone number including area code"
+              type="phone"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Validate Status
+
+Add `validateStatus="success|warning|error"` prop
+
+<Preview>
+  <Story name="Validate Status">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{ username: 'flash' }}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="username"
+              label="Username"
+              type="text"
+              validateStatus="success"
+            />
+            <Field
+              component={FormItem}
+              name="phone"
+              label="Phone"
+              help="10-digit phone number"
+              type="phone"
+              validateStatus="warning"
+            />
+            <Field
+              component={FormItem}
+              name="email"
+              label="Email Address"
+              help="preferred email address"
+              type="email"
+              validateStatus="error"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Validate Help
+
+Sometimes you want to show a validation help instead of the standard help.
+
+Add `validateHelp="validation message"` prop
+
+<Preview>
+  <Story name="Validate Help">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{ username: 'flash' }}
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="username"
+              label="Username"
+              type="text"
+              validateHelp="Username is already taken"
+              validateStatus="warning"
+            />
+            <Field
+              component={FormItem}
+              name="email"
+              label="Email Address"
+              help="preferred email address"
+              type="email"
+              validateHelp="Email address is required"
+              validateStatus="error"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+#### Use validate's error message
+
+With **react-final-form** you will know if the `Field` has errors by looking at the errors object passed in by the `Form` render function.
+
+<Preview>
+  <Story name="Validate Help: error message">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{
+          username: 'fastestmanalive',
+          email: 'speedster@barryallen.com',
+        }}
+        onSubmit={() => {}}
+        validate={() => ({
+          username: 'Nope! try again...',
+          email: 'email address is already taken.',
+        })}
+        render={({ handleSubmit, errors }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="username"
+              label="Username"
+              type="text"
+              validateHelp="Username is already taken"
+              validateStatus="warning"
+              validateHelp={!isEmpty(errors.username) && errors.username}
+              validateStatus={!isEmpty(errors.username) && 'warning'}
+            />
+            <Field
+              component={FormItem}
+              name="email"
+              label="Email Address"
+              help="preferred email address"
+              type="email"
+              validateHelp={!isEmpty(errors.email) && errors.email}
+              validateStatus={!isEmpty(errors.email) && 'error'}
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+### Checkbox
+
+Add `type="checkbox"` prop to have a checkbox input with a label that comes after the checkbox input.
+
+<Preview>
+  <Story name="Checkbox">
+    <Suspense fallback={null}>
+      <Form
+        onSubmit={() => {}}
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              component={FormItem}
+              name="agree"
+              label="I agree to terms and service"
+              type="checkbox"
+            />
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={FormItem} />

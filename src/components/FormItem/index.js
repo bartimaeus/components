@@ -52,8 +52,8 @@ const FormItem = ({
   size,
   style,
   type,
+  validateHelp,
   validateStatus,
-  warning,
   ...restProps
 }) => {
   const klassName = classNames(className, {
@@ -111,7 +111,7 @@ const FormItem = ({
     <Form.Item
       className={klassName}
       {...formItemLayout}
-      help={help}
+      help={validateHelp || help}
       {...restProps}
       {...validationProps}
     >
@@ -166,8 +166,8 @@ FormItem.defaultProps = {
   size: undefined,
   style: {},
   type: 'text',
+  validateHelp: undefined,
   validateStatus: undefined,
-  warning: undefined,
 }
 
 FormItem.propTypes = {
@@ -194,8 +194,8 @@ FormItem.propTypes = {
   size: PropTypes.string,
   style: PropTypes.object,
   type: PropTypes.string,
+  validateHelp: PropTypes.string,
   validateStatus: PropTypes.string,
-  warning: PropTypes.object,
 }
 
 export default FormItem

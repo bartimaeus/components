@@ -10,7 +10,7 @@ import { initialValues } from './formField.example'
 
 # FormField
 
-Field is a higher order component that will render custom form inputs based on the `type` prop passed to Field.
+`FormField` is a higher order component that will render custom form inputs based on the `type` prop passed to Field.
 
 ## Usage
 
@@ -20,6 +20,7 @@ We use `FormField` alongside **react-final-form**. `FormField` requires two prop
 
 ```jsx
 import { Form, Field } from 'react-final-form'
+import { FormField } from '@bartimaeus/components'
 
 const Form = props => {
   const [user, updateUser] = useState({})
