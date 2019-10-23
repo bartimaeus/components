@@ -71,7 +71,9 @@ const FormField = ({
   parser,
   placeholder,
   prefix,
+  renderOption,
   required,
+  resetTrigger,
   size,
   style,
   type,
@@ -115,7 +117,12 @@ const FormField = ({
     case 'editor':
       return (
         <EditorWrapper>
-          <Editor value={value} onChange={onChange} />
+          <Editor
+            {...input}
+            onChange={onChange}
+            resetTrigger={resetTrigger}
+            value={value}
+            />
         </EditorWrapper>
       )
     case 'month':
@@ -386,7 +393,9 @@ FormField.defaultProps = {
   parser: undefined,
   placeholder: null,
   prefix: null,
+  renderOption: undefined,
   required: undefined,
+  resetTrigger: undefined,
   size: undefined,
   style: {},
   type: 'text',
@@ -442,7 +451,11 @@ FormField.propTypes = {
   /** */
   prefix: PropTypes.node,
   /** */
+  renderOption: PropTypes.func,
+  /** */
   required: PropTypes.bool,
+  /** */
+  resetTrigger: PropTypes.any,
   /** */
   size: PropTypes.string,
   /** */
