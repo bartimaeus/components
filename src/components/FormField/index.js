@@ -79,7 +79,8 @@ const FormField = ({
   type,
   ...restProps
 }) => {
-  const { onChange, value } = input
+  const onChange = restProps.onChange || input.onChange
+  const { value } = input
   const fieldType = checkboxType || input.type || type
 
   switch (fieldType) {
@@ -122,7 +123,7 @@ const FormField = ({
             onChange={onChange}
             resetTrigger={resetTrigger}
             value={value}
-            />
+          />
         </EditorWrapper>
       )
     case 'month':
