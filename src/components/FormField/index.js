@@ -10,9 +10,7 @@ import {
   TimePicker,
 } from 'antd'
 import moment from 'moment'
-import styled from '@emotion/styled'
 import 'antd/dist/antd.css'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 // Helpers
 import normalizePhone from '../../lib/normalize-phone'
@@ -25,23 +23,6 @@ const ColorPicker = lazy(() => import('../ColorPicker'))
 
 // TextEditor Component
 const Editor = lazy(() => import('../Editor'))
-const EditorWrapper = styled.div`
-  .rdw-editor-toolbar {
-    margin-bottom: 0;
-  }
-  .editor-content.rdw-editor-main {
-    border: 1px solid #efefef;
-    margin-top: -1px;
-    min-height: 100px;
-    max-height: ${props => `${props.maxHeight || 225}px`};
-    overflow-y: auto;
-    padding: 4px 12px;
-  }
-  .editor-content .public-DraftStyleDefault-block {
-    padding: 0;
-    margin: 0;
-  }
-`
 
 const { Option } = Select
 const FormField = ({
@@ -77,8 +58,7 @@ const FormField = ({
   type,
   ...restProps
 }) => {
-  const onChange = restProps.onChange || input.onChange
-  const { value } = input
+  const { onChange, value } = input
   const fieldType = checkboxType || input.type || type
 
   switch (fieldType) {
@@ -114,14 +94,7 @@ const FormField = ({
         </>
       )
     case 'editor':
-      return (
-        <EditorWrapper>
-          <Editor
-            content={input.value}
-            onChange={({ note }) => input.onChange(note)}
-          />
-        </EditorWrapper>
-      )
+      return <Editor value={input.value} onChange={input.onChange} />
     case 'month':
       const { MonthPicker } = DatePicker
       return (
@@ -276,7 +249,7 @@ const FormField = ({
         <>
           <Select
             {...input}
-            onChange={onChange}
+            onChange={restProps.onChange || onChange}
             disabled={disabled}
             placeholder={placeholder}
             showSearch={allowSearch}
