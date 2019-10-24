@@ -26,22 +26,20 @@ const ColorPicker = lazy(() => import('../ColorPicker'))
 // TextEditor Component
 const Editor = lazy(() => import('../Editor'))
 const EditorWrapper = styled.div`
-  .rte {
-    border: none !important;
-    border-radius: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
   .rdw-editor-toolbar {
-    padding: 6px 5px;
     margin-bottom: 0;
   }
-  .demo-editor.rdw-editor-main {
+  .editor-content.rdw-editor-main {
     border: 1px solid #efefef;
     margin-top: -1px;
-    max-height: 225px;
+    min-height: 100px;
+    max-height: ${props => `${props.maxHeight || 225}px`};
     overflow-y: auto;
     padding: 4px 12px;
+  }
+  .editor-content .public-DraftStyleDefault-block {
+    padding: 0;
+    margin: 0;
   }
 `
 
@@ -119,10 +117,8 @@ const FormField = ({
       return (
         <EditorWrapper>
           <Editor
-            {...input}
-            onChange={onChange}
-            resetTrigger={resetTrigger}
-            value={value}
+            content={input.value}
+            onChange={({ note }) => input.onChange(note)}
           />
         </EditorWrapper>
       )
@@ -262,6 +258,7 @@ const FormField = ({
             <AjaxSelect
               {...input}
               disabled={disabled}
+              onChange={onChange}
               onSearch={onSearch}
               placeholder={placeholder}
               renderOption={restProps.renderOption}
@@ -279,6 +276,7 @@ const FormField = ({
         <>
           <Select
             {...input}
+            onChange={onChange}
             disabled={disabled}
             placeholder={placeholder}
             showSearch={allowSearch}
@@ -306,6 +304,7 @@ const FormField = ({
             autosize={autosize}
             className={className}
             disabled={disabled}
+            onChange={onChange}
             onPressEnter={onPressEnter}
             placeholder={placeholder || label}
             prefix={prefix || null}

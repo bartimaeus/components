@@ -1,104 +1,119 @@
-/* eslint react/require-default-props: 0 */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
+import isFunction from 'lodash/isFunction'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-const getEditorStateFromHtml = html => {
-  if (!html) {
-    const editorState = EditorState.createEmpty()
-    return editorState
-  }
-  const contentBlock = htmlToDraft(html)
-  if (contentBlock) {
-    const contentState = ContentState.createFromBlockArray(
-      contentBlock.contentBlocks
-    )
-    const editorState = EditorState.createWithContent(contentState)
-    return editorState
-  }
+const toolbar = {
+  options: ['inline', 'blockType', 'list', 'link', 'image'],
+  inline: {
+    inDropdown: true,
+    options: ['bold', 'italic', 'underline', 'strikethrough'],
+    bold: { className: 'bordered-option-classname' },
+    italic: { className: 'bordered-option-classname' },
+    underline: { className: 'bordered-option-classname' },
+  },
+  blockType: {
+    className: 'bordered-option-classname',
+    inDropdown: true,
+    options: ['Normal', 'H1', 'H2', 'H3', 'Blockquote'],
+  },
+  list: { inDropdown: true },
+  link: { inDropdown: true },
 }
 
-class RichTextEditor extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const stateChanges = {}
-    const { value: html } = nextProps
-    if (nextProps.resetTrigger !== prevState.resetTrigger) {
-      stateChanges.editorState = getEditorStateFromHtml(html)
-      stateChanges.resetTrigger = nextProps.resetTrigger
-    }
-    return stateChanges
+class TextEditor extends React.Component {
+  static propTypes = {
+    attribute: PropTypes.string,
+    content: PropTypes.string,
+    noteEdit: PropTypes.bool,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    attribute: 'note',
+    content: '',
+    noteEdit: undefined,
+    onBlur: undefined,
   }
 
   constructor(props) {
     super(props)
-    const { value: html } = props
-    this.state = {
-      editorState: getEditorStateFromHtml(html),
-      resetTrigger: props.resetTrigger,
+    const content = props.content || ''
+    const contentBlock = htmlToDraft(content)
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks
+      )
+      const editorState = EditorState.createWithContent(contentState)
+      this.state = {
+        editorState,
+      }
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { editorState } = this.state
+    if (newProps.content === '') {
+      const newEditorState = EditorState.push(
+        editorState,
+        ContentState.createFromText('')
+      )
+      this.setState({ editorState: newEditorState })
     }
   }
 
   onEditorStateChange = editorState => {
-    this.setState({
-      editorState,
-    })
-    if (this.props.onChange) {
-      const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-      this.props.onChange(html)
+    const { attribute, noteEdit, onChange } = this.props
+    this.setState({ editorState })
+
+    const currentContent = editorState.getCurrentContent()
+    const plainText = currentContent.getPlainText()
+    const content = draftToHtml(convertToRaw(currentContent))
+    if (noteEdit) {
+      return onChange(content, plainText)
     }
+    return onChange({
+      [attribute]: content,
+      [`${attribute}PlainText`]: plainText,
+    })
+  }
+
+  onEditorStateChangeBlur = (event, editorState) => {
+    const { attribute, onBlur } = this.props
+
+    // Don't continue processing if the user didn't specify onBlur prop
+    if (!onBlur || !isFunction(onBlur)) return
+
+    const currentContent = editorState.getCurrentContent()
+    const plainText = currentContent.getPlainText()
+    const content = draftToHtml(convertToRaw(currentContent))
+
+    return onBlur({
+      [attribute]: content,
+      [`${attribute}PlainText`]: plainText,
+    })
   }
 
   render() {
     const { editorState } = this.state
+
     return (
-      <div
-        className="rte"
-        style={{ border: '1px solid #d9d9d9', padding: 5, borderRadius: 4 }}
-      >
-        <Editor
-          editorState={editorState}
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onEditorStateChange={this.onEditorStateChange}
-          toolbar={{
-            inline: { inDropdown: true },
-            list: { inDropdown: true },
-            textAlign: { inDropdown: true },
-            link: { inDropdown: true },
-            history: { inDropdown: true },
-            image: {
-              uploadCallback: this.props.onImageUpload,
-              alt: { present: true },
-              previewImage: true,
-              defaultSize: {
-                height: 'auto',
-                width: '600',
-              },
-            },
-          }}
-        />
-      </div>
+      <Editor
+        editorClassName="editor-content"
+        editorState={editorState}
+        hashtag={{}}
+        onBlur={this.onEditorStateChangeBlur}
+        onEditorStateChange={this.onEditorStateChange}
+        spellCheck
+        toolbar={toolbar}
+      />
     )
   }
 }
-// using default props causes a warning with ant design forms.
-// RichTextEditor.defaultProps = {
-//   value: '',
-// };
 
-RichTextEditor.propTypes = {
-  /** Content of the editor. Content may contain allowable HTML tags */
-  value: PropTypes.string.isRequired,
-  /** Function that updates the value prop */
-  onChange: PropTypes.func.isRequired,
-  /** Function to call after image has been uploaded through Editor */
-  onImageUpload: PropTypes.func,
-  /** Allows Editor to load new value from props; otherwise, Editor state is managed locally after component mounts. */
-  resetTrigger: PropTypes.any,
-}
-
-export default RichTextEditor
+export default TextEditor

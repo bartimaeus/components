@@ -1,5 +1,8 @@
+import { Suspense } from 'react'
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Form, Field } from 'react-final-form'
 
+import FormItem from '../FormItem'
 import Editor from './index'
 
 <Meta title="Form Helpers|Editor" component={Editor} />
@@ -34,10 +37,21 @@ const Form = props => {
 
 <Preview>
   <Story name="Editor">
-    <Editor
-      value='<h1>Hello<span style="font-family: Tahoma;"> world!</span></h1>'
-      onChange={value => console.log(value)}
-    />
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{
+          message:
+            '<h1>Hello<span style="font-family: Tahoma;"> world!</span></h1>',
+        }}
+        onSubmit={values => console.log('values', values)}
+        render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormItem} name="message" type="editor" />
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+          </form>
+        )}
+      />
+    </Suspense>
   </Story>
 </Preview>
 
