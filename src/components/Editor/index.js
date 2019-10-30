@@ -6,23 +6,6 @@ import draftToHtml from 'draftjs-to-html'
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-const toolbar = {
-  inline: { inDropdown: true },
-  list: { inDropdown: true },
-  textAlign: { inDropdown: true },
-  link: { inDropdown: true },
-  history: { inDropdown: true },
-  image: {
-    uploadCallback: this.props.onImageUpload,
-    alt: { present: true },
-    previewImage: true,
-    defaultSize: {
-      height: 'auto',
-      width: '600',
-    },
-  },
-}
-
 class TextEditor extends React.Component {
   constructor(props) {
     super(props)
@@ -65,7 +48,22 @@ class TextEditor extends React.Component {
           onBlur={this.onEditorBlur}
           onEditorStateChange={this.onEditorStateChange}
           onFocus={this.props.onFocus}
-          toolbar={toolbar}
+          toolbar={{
+            inline: { inDropdown: true },
+            list: { inDropdown: true },
+            textAlign: { inDropdown: true },
+            link: { inDropdown: true },
+            history: { inDropdown: true },
+            image: {
+              uploadCallback: this.props.onImageUpload,
+              alt: { present: true },
+              previewImage: true,
+              defaultSize: {
+                height: 'auto',
+                width: '600',
+              },
+            },
+          }}
         />
       </div>
     )
