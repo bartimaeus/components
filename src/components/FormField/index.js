@@ -71,6 +71,7 @@ const FormField = ({
   parser,
   placeholder,
   prefix,
+  renderOption,
   required,
   size,
   style,
@@ -256,7 +257,7 @@ const FormField = ({
               disabled={disabled}
               onSearch={onSearch}
               placeholder={placeholder}
-              renderOption={restProps.renderOption}
+              renderOption={renderOption}
               showSearch={allowSearch}
               size={size}
               style={style}
@@ -386,6 +387,7 @@ FormField.defaultProps = {
   parser: undefined,
   placeholder: null,
   prefix: null,
+  renderOption: undefined,
   required: undefined,
   size: undefined,
   style: {},
@@ -441,6 +443,8 @@ FormField.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   prefix: PropTypes.node,
+  /** */
+  renderOption: PropTypes.func,
   /** */
   required: PropTypes.bool,
   /** */
