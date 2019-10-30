@@ -2,28 +2,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Editor } from 'react-draft-wysiwyg'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { convertToRaw } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
-const getEditorStateFromHtml = html => {
-  if (!html) {
-    const editorState = EditorState.createEmpty()
-    return editorState
-  }
-  const contentBlock = htmlToDraft(html)
-  if (contentBlock) {
-    const contentState = ContentState.createFromBlockArray(
-      contentBlock.contentBlocks
-    )
-    const editorState = EditorState.createWithContent(contentState)
-    return editorState
-  }
-}
-
-class RichTextEditor extends React.Component {
+class TextEditor extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -86,11 +70,11 @@ class RichTextEditor extends React.Component {
   }
 }
 
-RichTextEditor.defaultProps = {
+TextEditor.defaultProps = {
   value: '',
 }
 
-RichTextEditor.propTypes = {
+TextEditor.propTypes = {
   value: PropTypes.string,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
@@ -98,4 +82,4 @@ RichTextEditor.propTypes = {
   onImageUpload: PropTypes.func,
 }
 
-export default RichTextEditor
+export default TextEditor
