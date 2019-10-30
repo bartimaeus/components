@@ -5,6 +5,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const getEditorStateFromHtml = html => {
@@ -23,22 +24,16 @@ const getEditorStateFromHtml = html => {
 }
 
 class RichTextEditor extends React.Component {
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const stateChanges = {}
-    const { value: html } = nextProps
-    if (nextProps.resetTrigger !== prevState.resetTrigger) {
-      stateChanges.editorState = getEditorStateFromHtml(html)
-      stateChanges.resetTrigger = nextProps.resetTrigger
-    }
-    return stateChanges
-  }
-
   constructor(props) {
     super(props)
-    const { value: html } = props
     this.state = {
-      editorState: getEditorStateFromHtml(html),
-      resetTrigger: props.resetTrigger,
+      editorState: getEditorStateFromHtml(props.value),
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      this.setState({ editorState: getEditorStateFromHtml(this.props.value) })
     }
   }
 
@@ -46,10 +41,13 @@ class RichTextEditor extends React.Component {
     this.setState({
       editorState,
     })
-    if (this.props.onChange) {
-      const html = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-      this.props.onChange(html)
-    }
+  }
+
+  onEditorBlur = () => {
+    const { onChange } = this.props
+    const { editorState } = this.state
+    const content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    onChange(content)
   }
 
   render() {
@@ -63,7 +61,9 @@ class RichTextEditor extends React.Component {
           editorState={editorState}
           wrapperClassName="demo-wrapper"
           editorClassName="demo-editor"
+          onBlur={this.onEditorBlur}
           onEditorStateChange={this.onEditorStateChange}
+          onFocus={this.props.onFocus}
           toolbar={{
             inline: { inDropdown: true },
             list: { inDropdown: true },
@@ -85,20 +85,17 @@ class RichTextEditor extends React.Component {
     )
   }
 }
-// using default props causes a warning with ant design forms.
-// RichTextEditor.defaultProps = {
-//   value: '',
-// };
+
+RichTextEditor.defaultProps = {
+  value: '',
+}
 
 RichTextEditor.propTypes = {
-  /** Content of the editor. Content may contain allowable HTML tags */
-  value: PropTypes.string.isRequired,
-  /** Function that updates the value prop */
-  onChange: PropTypes.func.isRequired,
-  /** Function to call after image has been uploaded through Editor */
+  value: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
   onImageUpload: PropTypes.func,
-  /** Allows Editor to load new value from props; otherwise, Editor state is managed locally after component mounts. */
-  resetTrigger: PropTypes.any,
 }
 
 export default RichTextEditor
