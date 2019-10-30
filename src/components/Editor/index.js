@@ -1,119 +1,87 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Editor } from 'react-draft-wysiwyg'
-import { EditorState, convertToRaw, ContentState } from 'draft-js'
+import { convertToRaw } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
-import htmlToDraft from 'html-to-draftjs'
-import isFunction from 'lodash/isFunction'
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const toolbar = {
-  options: ['inline', 'blockType', 'list', 'link', 'image'],
-  inline: {
-    inDropdown: true,
-    options: ['bold', 'italic', 'underline', 'strikethrough'],
-    bold: { className: 'bordered-option-classname' },
-    italic: { className: 'bordered-option-classname' },
-    underline: { className: 'bordered-option-classname' },
-  },
-  blockType: {
-    className: 'bordered-option-classname',
-    inDropdown: true,
-    options: ['Normal', 'H1', 'H2', 'H3', 'Blockquote'],
-  },
+  inline: { inDropdown: true },
   list: { inDropdown: true },
+  textAlign: { inDropdown: true },
   link: { inDropdown: true },
+  history: { inDropdown: true },
+  image: {
+    uploadCallback: this.props.onImageUpload,
+    alt: { present: true },
+    previewImage: true,
+    defaultSize: {
+      height: 'auto',
+      width: '600',
+    },
+  },
 }
 
 class TextEditor extends React.Component {
-  static propTypes = {
-    attribute: PropTypes.string,
-    content: PropTypes.string,
-    noteEdit: PropTypes.bool,
-    onBlur: PropTypes.func,
-    onChange: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    attribute: 'note',
-    content: '',
-    noteEdit: undefined,
-    onBlur: undefined,
-  }
-
   constructor(props) {
     super(props)
-    const content = props.content || ''
-    const contentBlock = htmlToDraft(content)
-    if (contentBlock) {
-      const contentState = ContentState.createFromBlockArray(
-        contentBlock.contentBlocks
-      )
-      const editorState = EditorState.createWithContent(contentState)
-      this.state = {
-        editorState,
-      }
+    this.state = {
+      editorState: getEditorStateFromHtml(props.value),
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    const { editorState } = this.state
-    if (newProps.content === '') {
-      const newEditorState = EditorState.push(
-        editorState,
-        ContentState.createFromText('')
-      )
-      this.setState({ editorState: newEditorState })
+  componentDidUpdate(prevProps) {
+    if (prevProps.value !== this.props.value) {
+      this.setState({ editorState: getEditorStateFromHtml(this.props.value) })
     }
   }
 
   onEditorStateChange = editorState => {
-    const { attribute, noteEdit, onChange } = this.props
-    this.setState({ editorState })
-
-    const currentContent = editorState.getCurrentContent()
-    const plainText = currentContent.getPlainText()
-    const content = draftToHtml(convertToRaw(currentContent))
-    if (noteEdit) {
-      return onChange(content, plainText)
-    }
-    return onChange({
-      [attribute]: content,
-      [`${attribute}PlainText`]: plainText,
+    this.setState({
+      editorState,
     })
   }
 
-  onEditorStateChangeBlur = (event, editorState) => {
-    const { attribute, onBlur } = this.props
-
-    // Don't continue processing if the user didn't specify onBlur prop
-    if (!onBlur || !isFunction(onBlur)) return
-
-    const currentContent = editorState.getCurrentContent()
-    const plainText = currentContent.getPlainText()
-    const content = draftToHtml(convertToRaw(currentContent))
-
-    return onBlur({
-      [attribute]: content,
-      [`${attribute}PlainText`]: plainText,
-    })
+  onEditorBlur = () => {
+    const { onChange } = this.props
+    const { editorState } = this.state
+    const content = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+    onChange(content)
   }
 
   render() {
     const { editorState } = this.state
 
     return (
-      <Editor
-        editorClassName="editor-content"
-        editorState={editorState}
-        hashtag={{}}
-        onBlur={this.onEditorStateChangeBlur}
-        onEditorStateChange={this.onEditorStateChange}
-        spellCheck
-        toolbar={toolbar}
-      />
+      <div
+        className="rte"
+        style={{ border: '1px solid #d9d9d9', padding: 5, borderRadius: 4 }}
+      >
+        <Editor
+          editorState={editorState}
+          wrapperClassName="demo-wrapper"
+          editorClassName="demo-editor"
+          onBlur={this.onEditorBlur}
+          onEditorStateChange={this.onEditorStateChange}
+          onFocus={this.props.onFocus}
+          toolbar={toolbar}
+        />
+      </div>
     )
   }
+}
+
+TextEditor.defaultProps = {
+  value: '',
+}
+
+TextEditor.propTypes = {
+  value: PropTypes.string,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onImageUpload: PropTypes.func,
 }
 
 export default TextEditor
