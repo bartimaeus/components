@@ -117,8 +117,8 @@ const FormField = ({
       return (
         <EditorWrapper>
           <Editor
-            content={input.value}
-            onChange={({ note }) => input.onChange(note)}
+            content={value}
+            onChange={onChange}
           />
         </EditorWrapper>
       )

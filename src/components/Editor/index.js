@@ -1,3 +1,4 @@
+/* eslint react/require-default-props: 0 */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Editor } from 'react-draft-wysiwyg'
@@ -51,7 +52,6 @@ class TextEditor extends React.Component {
 
   render() {
     const { editorState } = this.state
-
     return (
       <div
         className="rte"
