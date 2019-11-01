@@ -29,7 +29,7 @@ const EditorWrapper = styled.div`
   .rdw-editor-toolbar {
     margin-bottom: 0;
   }
-  .editor-content.rdw-editor-main {
+  .demo-editor.rdw-editor-main {
     border: 1px solid #efefef;
     margin-top: -1px;
     min-height: 100px;

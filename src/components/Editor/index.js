@@ -5,7 +5,6 @@ import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
-
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 
 const getEditorStateFromHtml = html => {
@@ -57,30 +56,30 @@ class TextEditor extends React.Component {
         className="rte"
         style={{ border: '1px solid #d9d9d9', padding: 5, borderRadius: 4 }}
       >
-        <Editor
-          editorState={editorState}
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onBlur={this.onEditorBlur}
-          onEditorStateChange={this.onEditorStateChange}
-          onFocus={this.props.onFocus}
-          toolbar={{
-            inline: { inDropdown: true },
-            list: { inDropdown: true },
-            textAlign: { inDropdown: true },
-            link: { inDropdown: true },
-            history: { inDropdown: true },
-            image: {
-              uploadCallback: this.props.onImageUpload,
-              alt: { present: true },
-              previewImage: true,
-              defaultSize: {
-                height: 'auto',
-                width: '600',
+          <Editor
+            editorState={editorState}
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            onBlur={this.onEditorBlur}
+            onEditorStateChange={this.onEditorStateChange}
+            onFocus={this.props.onFocus}
+            toolbar={{
+              inline: { inDropdown: true },
+              list: { inDropdown: true },
+              textAlign: { inDropdown: true },
+              link: { inDropdown: true },
+              history: { inDropdown: true },
+              image: {
+                uploadCallback: this.props.onImageUpload,
+                alt: { present: true },
+                previewImage: true,
+                defaultSize: {
+                  height: 'auto',
+                  width: '600',
+                },
               },
-            },
-          }}
-        />
+            }}
+          />
       </div>
     )
   }
