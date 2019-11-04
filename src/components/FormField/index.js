@@ -49,7 +49,7 @@ const FormField = ({
   addonBefore,
   allowSearch,
   ajaxSelect,
-  autosize,
+  autoSize,
   checkboxType,
   className,
   disabled,
@@ -84,12 +84,12 @@ const FormField = ({
   switch (fieldType) {
     case 'checkbox':
       return (
-        <Checkbox
-          {...input}
-          disabled={disabled}
-          onChange={onChange}
-          style={style}
-        >
+            <Checkbox
+              {...input}
+              disabled={disabled}
+              onChange={input.onChange}
+              style={style}
+            >
           {label}
         </Checkbox>
       )
@@ -301,7 +301,7 @@ const FormField = ({
         <>
           <Input.TextArea
             {...input}
-            autosize={autosize}
+            autoSize={autoSize}
             className={className}
             disabled={disabled}
             onChange={onChange}
@@ -374,7 +374,7 @@ FormField.defaultProps = {
   addonBefore: undefined,
   allowSearch: false,
   ajaxSelect: false,
-  autosize: false,
+  autoSize: false,
   checkboxType: undefined,
   className: undefined,
   disabled: false,
@@ -411,7 +411,7 @@ FormField.propTypes = {
   /** Allow Select to fetch options dynamically through onSearch function. */
   ajaxSelect: PropTypes.bool,
   /** */
-  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  autoSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /** */
   checkboxType: PropTypes.string,
   /** */
