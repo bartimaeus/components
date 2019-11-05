@@ -59,6 +59,7 @@ const FormField = ({
   inputType,
   label,
   max,
+  maxHeight,
   maxLength,
   meta: { error, touched },
   min,
@@ -115,7 +116,7 @@ const FormField = ({
       )
     case 'editor':
       return (
-        <EditorWrapper>
+        <EditorWrapper maxHeight={maxHeight}>
           <Editor
             onChange={onChange}
             value={value}
@@ -304,7 +305,7 @@ const FormField = ({
             autoSize={autoSize}
             className={className}
             disabled={disabled}
-            onChange={onChange}
+            onChange={input.onChange}
             onPressEnter={onPressEnter}
             placeholder={placeholder || label}
             prefix={prefix || null}
@@ -384,6 +385,7 @@ FormField.defaultProps = {
   inputType: 'text',
   label: null,
   max: undefined,
+  maxHeight: undefined,
   maxLength: undefined,
   min: undefined,
   multiSelect: false,
@@ -430,6 +432,8 @@ FormField.propTypes = {
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   max: PropTypes.number,
+  /** */
+  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** */
   maxLength: PropTypes.number,
   /** */
