@@ -26,20 +26,8 @@ const ColorPicker = lazy(() => import('../ColorPicker'))
 // TextEditor Component
 const Editor = lazy(() => import('../Editor'))
 const EditorWrapper = styled.div`
-  .rdw-editor-toolbar {
-    margin-bottom: 0;
-  }
-  .editor-content.rdw-editor-main {
-    border: 1px solid #efefef;
-    margin-top: -1px;
-    min-height: 100px;
+  .bartimaeus-editor.rdw-editor-main {
     max-height: ${props => `${props.maxHeight || 225}px`};
-    overflow-y: auto;
-    padding: 4px 12px;
-  }
-  .editor-content .public-DraftStyleDefault-block {
-    padding: 0;
-    margin: 0;
   }
 `
 
@@ -49,7 +37,7 @@ const FormField = ({
   addonBefore,
   allowSearch,
   ajaxSelect,
-  autosize,
+  autoSize,
   checkboxType,
   className,
   disabled,
@@ -59,6 +47,7 @@ const FormField = ({
   inputType,
   label,
   max,
+  maxHeight,
   maxLength,
   meta: { error, touched },
   min,
@@ -87,7 +76,7 @@ const FormField = ({
         <Checkbox
           {...input}
           disabled={disabled}
-          onChange={onChange}
+          onChange={input.onChange}
           style={style}
         >
           {label}
@@ -115,11 +104,8 @@ const FormField = ({
       )
     case 'editor':
       return (
-        <EditorWrapper>
-          <Editor
-            onChange={onChange}
-            value={value}
-          />
+        <EditorWrapper maxHeight={maxHeight}>
+          <Editor onChange={onChange} value={value} />
         </EditorWrapper>
       )
     case 'month':
@@ -301,10 +287,10 @@ const FormField = ({
         <>
           <Input.TextArea
             {...input}
-            autosize={autosize}
+            autoSize={autoSize}
             className={className}
             disabled={disabled}
-            onChange={onChange}
+            onChange={input.onChange}
             onPressEnter={onPressEnter}
             placeholder={placeholder || label}
             prefix={prefix || null}
@@ -374,7 +360,7 @@ FormField.defaultProps = {
   addonBefore: undefined,
   allowSearch: false,
   ajaxSelect: false,
-  autosize: false,
+  autoSize: false,
   checkboxType: undefined,
   className: undefined,
   disabled: false,
@@ -384,6 +370,7 @@ FormField.defaultProps = {
   inputType: 'text',
   label: null,
   max: undefined,
+  maxHeight: undefined,
   maxLength: undefined,
   min: undefined,
   multiSelect: false,
@@ -411,7 +398,7 @@ FormField.propTypes = {
   /** Allow Select to fetch options dynamically through onSearch function. */
   ajaxSelect: PropTypes.bool,
   /** */
-  autosize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  autoSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   /** */
   checkboxType: PropTypes.string,
   /** */
@@ -430,6 +417,8 @@ FormField.propTypes = {
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   max: PropTypes.number,
+  /** */
+  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** */
   maxLength: PropTypes.number,
   /** */

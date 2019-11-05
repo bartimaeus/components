@@ -5,8 +5,8 @@ import { Editor } from 'react-draft-wysiwyg'
 import { EditorState, convertToRaw, ContentState } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
-
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import './style.css'
 
 const getEditorStateFromHtml = html => {
   if (!html) {
@@ -59,8 +59,8 @@ class TextEditor extends React.Component {
       >
         <Editor
           editorState={editorState}
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
+          wrapperClassName="bartimaeus-editor-wrapper"
+          editorClassName="bartimaeus-editor"
           onBlur={this.onEditorBlur}
           onEditorStateChange={this.onEditorStateChange}
           onFocus={this.props.onFocus}
