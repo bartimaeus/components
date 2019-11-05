@@ -158,7 +158,7 @@ FormItem.defaultProps = {
   min: 0,
   multiSelect: false,
   noLabel: false,
-  onChange: () => {},
+  onChange: undefined,
   options: null,
   placeholder: null,
   prefix: null,

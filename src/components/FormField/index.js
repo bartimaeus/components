@@ -52,6 +52,7 @@ const FormField = ({
   meta: { error, touched },
   min,
   multiSelect,
+  onChange,
   onPressEnter,
   onSearch,
   options,
@@ -64,9 +65,8 @@ const FormField = ({
   size,
   style,
   type,
-  ...restProps
 }) => {
-  const onChange = restProps.onChange || input.onChange
+  const handleChange = onChange || input.onChange
   const { value } = input
   const fieldType = checkboxType || input.type || type
 
@@ -76,7 +76,7 @@ const FormField = ({
         <Checkbox
           {...input}
           disabled={disabled}
-          onChange={input.onChange}
+          onChange={handleChange}
           style={style}
         >
           {label}
@@ -95,7 +95,7 @@ const FormField = ({
             disabled={disabled}
             value={value ? moment(value) : null}
             format="MM/DD/YYYY"
-            onChange={onChange}
+            onChange={handleChange}
             size={size}
             style={style}
           />
@@ -105,7 +105,7 @@ const FormField = ({
     case 'editor':
       return (
         <EditorWrapper maxHeight={maxHeight}>
-          <Editor onChange={onChange} value={value} />
+          <Editor onChange={handleChange} value={value} />
         </EditorWrapper>
       )
     case 'month':
@@ -115,7 +115,7 @@ const FormField = ({
           <MonthPicker
             disabled={disabled}
             format="MM/YYYY"
-            onChange={onChange}
+            onChange={handleChange}
             placeholder="Select month"
             size={size}
             style={style}
@@ -244,7 +244,7 @@ const FormField = ({
             <AjaxSelect
               {...input}
               disabled={disabled}
-              onChange={onChange}
+              onChange={handleChange}
               onSearch={onSearch}
               placeholder={placeholder}
               renderOption={renderOption}
@@ -262,7 +262,7 @@ const FormField = ({
         <>
           <Select
             {...input}
-            onChange={onChange}
+            onChange={handleChange}
             disabled={disabled}
             placeholder={placeholder}
             showSearch={allowSearch}
@@ -290,7 +290,7 @@ const FormField = ({
             autoSize={autoSize}
             className={className}
             disabled={disabled}
-            onChange={input.onChange}
+            onChange={handleChange}
             onPressEnter={onPressEnter}
             placeholder={placeholder || label}
             prefix={prefix || null}
@@ -306,7 +306,7 @@ const FormField = ({
           <TimePicker
             disabled={disabled}
             format="h:mm a"
-            onChange={onChange}
+            onChange={handleChange}
             size={size}
             style={style}
             value={value ? moment(value) : null}
@@ -374,6 +374,7 @@ FormField.defaultProps = {
   maxLength: undefined,
   min: undefined,
   multiSelect: false,
+  onChange: undefined,
   onPressEnter: e => e.preventDefault(),
   onSearch: e => e.preventDefault(),
   options: null,
@@ -427,6 +428,8 @@ FormField.propTypes = {
   min: PropTypes.number,
   /** */
   multiSelect: PropTypes.bool,
+  /** Allow a custom onChange function to be defined. Helpfule for side-effects not relating to the form state */
+  onChange: PropTypes.func,
   /** */
   onPressEnter: PropTypes.func,
   /** */
