@@ -26,20 +26,8 @@ const ColorPicker = lazy(() => import('../ColorPicker'))
 // TextEditor Component
 const Editor = lazy(() => import('../Editor'))
 const EditorWrapper = styled.div`
-  .rdw-editor-toolbar {
-    margin-bottom: 0;
-  }
-  .demo-editor.rdw-editor-main {
-    border: 1px solid #efefef;
-    margin-top: -1px;
-    min-height: 100px;
+  .bartimaeus-editor.rdw-editor-main {
     max-height: ${props => `${props.maxHeight || 225}px`};
-    overflow-y: auto;
-    padding: 4px 12px;
-  }
-  .editor-content .public-DraftStyleDefault-block {
-    padding: 0;
-    margin: 0;
   }
 `
 
@@ -85,12 +73,12 @@ const FormField = ({
   switch (fieldType) {
     case 'checkbox':
       return (
-            <Checkbox
-              {...input}
-              disabled={disabled}
-              onChange={input.onChange}
-              style={style}
-            >
+        <Checkbox
+          {...input}
+          disabled={disabled}
+          onChange={input.onChange}
+          style={style}
+        >
           {label}
         </Checkbox>
       )
@@ -117,10 +105,7 @@ const FormField = ({
     case 'editor':
       return (
         <EditorWrapper maxHeight={maxHeight}>
-          <Editor
-            onChange={onChange}
-            value={value}
-          />
+          <Editor onChange={onChange} value={value} />
         </EditorWrapper>
       )
     case 'month':
