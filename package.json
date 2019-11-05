@@ -30,7 +30,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.20",
     "@emotion/styled": "^10.0.17",
-    "antd": "^3.23.5",
+    "antd": "^3.24.0",
     "draft-js": "^0.11.0",
     "draftjs-to-html": "^0.8.4",
     "html-to-draftjs": "^1.4.0",

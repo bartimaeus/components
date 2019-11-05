@@ -26,14 +26,14 @@ const Form = props => {
 
   return (
     <form onSubmit={save}>
-      <Editor value={value} onChange={onChange} />
+      <Editor value={value} onChange={onChange} maxHeight={maxHeight} />
       <button onClick={save}>Save</button>
     </form>
   )
 }
 ```
 
-## Example
+## No maxHeight Example
 
 <Preview>
   <Story name="Editor">
@@ -47,6 +47,28 @@ const Form = props => {
         render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <Field component={FormItem} name="message" type="editor" />
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
+
+## Example
+
+<Preview>
+  <Story name="Editor Without maxHeight">
+    <Suspense fallback={null}>
+      <Form
+        initialValues={{
+          message:
+            '<h1>Hello<span style="font-family: Tahoma;"> world!</span></h1>',
+        }}
+        onSubmit={values => console.log('values', values)}
+        render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+            <Field component={FormItem} name="message" maxHeight="none" type="editor" />
             <pre>{JSON.stringify(values, null, 4)}</pre>
           </form>
         )}
