@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { notification, Select } from 'antd'
+import debounce from 'lodash/debounce'
 
 class AjaxSelect extends React.PureComponent {
   static defaultProps = {
@@ -74,7 +75,7 @@ class AjaxSelect extends React.PureComponent {
         onDropdownVisibleChange={() => {}}
         onChange={onChange}
         // onPopupScroll={this.handleScroll}
-        onSearch={this.handleSearch}
+        onSearch={debounce(this.handleSearch, 500)}
         placeholder={placeholder}
         showSearch
         style={style}
