@@ -1,6 +1,7 @@
 import { Suspense } from 'react'
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
+import { Select } from 'antd'
 
 import FormField from './index'
 // import PrettyProps from '../PrettyProps'
@@ -21,6 +22,7 @@ We use `FormField` alongside **react-final-form**. `FormField` requires two prop
 ```jsx
 import { Form, Field } from 'react-final-form'
 import { FormField } from '@bartimaeus/components'
+import { Select } from 'antd'
 
 const Form = props => {
   const [user, updateUser] = useState({})
@@ -40,6 +42,35 @@ const Form = props => {
   )
 }
 ```
+## AjaxSelect
+
+`ajaxSelect={true} type="select"`
+<Preview>
+  <Story name="AjaxSelect" style={{ padding: 25 }}>
+   <Suspense fallback={null}>
+    <Form
+      initialValues={{}}
+      onSubmit={values => console.log('values', values)}
+      render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              ajaxSelect
+              component={FormField}
+              filterOption={false}
+              name="name"
+              onSearch={initialValues.getContacts}
+              renderOption={option => (<Select.Option key={option.name}>{option.name}</Select.Option>)}
+              searchParams={values}
+              showSearch
+              type="select"
+            />
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+          </form>
+        )}
+      />
+    </Suspense>
+  </Story>
+</Preview>
 
 ### Checkbox
 
