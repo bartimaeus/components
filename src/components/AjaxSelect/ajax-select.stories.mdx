@@ -1,0 +1,65 @@
+import { Suspense, useState } from 'react'
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
+import { Form, Field } from 'react-final-form'
+import { Select } from 'antd'
+
+import { api, initialValues } from './ajax-initialValues.example.js'
+import AjaxSelect from './ajax-select.example.js'
+
+
+<Meta title="Form Helpers|AjaxSelect" component={AjaxSelect} />
+
+# AjaxSelect
+
+AjaxSelect is a way to allow a user to select a color graphically.
+
+## Usage
+
+AjaxSelect requires an **input** object prop with two properties **value** _(string)_ and **onChange** _(function)_.
+
+```jsx
+import { AjaxSelect } from '@bartimaeus/components'
+import { Select } from 'antd'
+
+const Form = props => {
+  const [value, onChange] = useState()
+  return (
+    <form onSubmit={save}>
+      <AjaxSelect
+        onChange={onChange}
+        onSearch={api.getContacts}
+        placeholder="Select a contact"
+        renderOption={option => (<Select.Option key={option.name}>{option.name}</Select.Option>)}
+        value={value}
+        />
+      <button onClick={save}>Save</button>
+    </form>
+  )
+}
+```
+
+## Example
+
+
+
+<Preview>
+  <Story name="AjaxSelect" style={{ padding: 25 }}>
+    <div>
+      <label style={{ display: 'inline-block', marginBottom: 4 }}>
+        Select Contact:
+      </label>
+      <AjaxSelect
+        onChange={initialValues.onChange}
+        onSearch={api.getContacts}
+        placeholder="Select a contact"
+        renderOption={option => <Select.Option key={option.name}>{option.name}</Select.Option>}
+        style={{ width: 250 }}
+        value={initialValues.value}
+       />
+    </div>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={AjaxSelect} />
