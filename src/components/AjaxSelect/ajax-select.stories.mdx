@@ -6,7 +6,6 @@ import { Select } from 'antd'
 import { api, initialValues } from './ajax-initialValues.example.js'
 import AjaxSelect from './ajax-select.example.js'
 
-
 <Meta title="Form Helpers|AjaxSelect" component={AjaxSelect} />
 
 # AjaxSelect
@@ -21,6 +20,8 @@ AjaxSelect requires an **input** object prop with two properties **value** _(str
 import { AjaxSelect } from '@bartimaeus/components'
 import { Select } from 'antd'
 
+const { Option } = Select
+
 const Form = props => {
   const [value, onChange] = useState()
   return (
@@ -29,7 +30,7 @@ const Form = props => {
         onChange={onChange}
         onSearch={api.getContacts}
         placeholder="Select a contact"
-        renderOption={option => (<Select.Option key={option.name}>{option.name}</Select.Option>)}
+        renderOption={option => (<Option key={option.name}>{option.name}</Option>)}
         value={value}
         />
       <button onClick={save}>Save</button>
@@ -40,12 +41,10 @@ const Form = props => {
 
 ## Example
 
-
-
 <Preview>
   <Story name="AjaxSelect" style={{ padding: 25 }}>
     <div>
-      <label style={{ display: 'inline-block', marginBottom: 4 }}>
+      <label style={{ display: 'inline-block', marginBottom: 4, marginRight: 8 }}>
         Select Contact:
       </label>
       <AjaxSelect
