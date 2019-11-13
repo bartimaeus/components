@@ -1,3 +1,4 @@
+export { default as AjaxSelect } from './components/AjaxSelect'
 export { default as Button } from './components/Button'
 export { default as ColorPicker } from './components/ColorPicker'
 export { default as Editor } from './components/Editor/index'
