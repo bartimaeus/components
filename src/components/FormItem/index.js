@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Form } from 'antd'
-import { get, isEmpty } from 'lodash'
+import get from 'lodash/get'
+import isEmpty from 'lodash/isEmpty'
 import classNames from 'classnames'
 import styled from '@emotion/styled'
-import 'antd/dist/antd.css'
+// import 'antd/dist/antd.css'
 import './style.css'
 
 // Components
@@ -90,10 +91,7 @@ const FormItem = ({
 
   // Add conditionl validation props
   const validationProps = (() => {
-    if (
-      required &&
-      (!input.value && input.value !== 0 && isEmpty(input.value))
-    ) {
+    if (required && !input.value && input.value !== 0 && isEmpty(input.value)) {
       return {
         hasFeedback: true,
         validateStatus: 'warning',
