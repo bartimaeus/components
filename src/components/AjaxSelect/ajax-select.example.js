@@ -30,7 +30,7 @@ AjaxSelect.propTypes = {
   options: PropTypes.array,
   renderOption: PropTypes.func,
   style: PropTypes.object,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
 }
 
 export default AjaxSelect

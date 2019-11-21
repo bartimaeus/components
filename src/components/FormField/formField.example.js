@@ -4,6 +4,7 @@ export const initialValues = {
   phoneNumber: '(828) 281-8121',
   name: 'Eric Shelley',
   message: 'Ham and cheese sounds good right now.',
+  placeholder: 'Search for a contact',
   getContacts: async value => {
     let response = {
       data: [
