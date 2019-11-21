@@ -1,10 +1,11 @@
-import React, { lazy } from 'react'
+import React, { lazy, useState } from 'react'
 import PropTypes from 'prop-types'
 import {
   Checkbox,
   DatePicker,
   Input,
   InputNumber,
+  notification,
   Radio,
   Select,
   TimePicker,
@@ -69,6 +70,7 @@ const FormField = ({
   const handleChange = onChange || input.onChange
   const { value } = input
   const fieldType = checkboxType || input.type || type
+  const [selectValue, setSelectValue] = useState()
 
   switch (fieldType) {
     case 'checkbox':
@@ -237,6 +239,21 @@ const FormField = ({
 
       // handle ant design error when value of a multiselect is a string
       if (multiSelect && typeof value === 'string') return null
+      const handleSelectChange = async val => {
+        let response
+
+        try {
+          input.onChange(val)
+          response = await setSelectValue(val)
+        } catch (err) {
+          notification.error({
+            message: `Oops! There was an error loading additional options`,
+            details: error.toString(),
+          })
+          console.error(err)
+        }
+        return response
+      }
 
       if (ajaxSelect) {
         return (
@@ -244,7 +261,6 @@ const FormField = ({
             <AjaxSelect
               {...input}
               disabled={disabled}
-              onChange={handleChange}
               onSearch={onSearch}
               placeholder={placeholder}
               renderOption={renderOption}
@@ -262,12 +278,13 @@ const FormField = ({
         <>
           <Select
             {...input}
-            onChange={handleChange}
+            onChange={handleSelectChange}
             disabled={disabled}
             placeholder={placeholder}
             showSearch={allowSearch}
             size={size}
             style={style}
+            value={input.value === '' ? selectValue : input.value}
             {...mode}
           >
             {options.map(option => (

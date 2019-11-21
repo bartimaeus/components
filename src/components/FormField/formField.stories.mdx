@@ -59,6 +59,7 @@ const Form = props => {
               filterOption={false}
               name="name"
               onSearch={initialValues.getContacts}
+              placeholder={initialValues.placeholder}
               renderOption={option => (<Select.Option key={option.name}>{option.name}</Select.Option>)}
               searchParams={values}
               showSearch
@@ -367,6 +368,7 @@ If `type` is not specicied the default component returned from `FormField` is a 
             <Field
               component={FormField}
               name="bestPizza"
+              placeholder="Select a food"
               options={[
                 { value: 1, label: 'Dominos' },
                 { value: 2, label: 'Pizza Hut' },
