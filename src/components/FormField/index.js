@@ -261,14 +261,12 @@ const FormField = ({
             <AjaxSelect
               {...input}
               disabled={disabled}
-              onChange={handleSelectChange}
               onSearch={onSearch}
               placeholder={placeholder}
               renderOption={renderOption}
               showSearch={allowSearch}
               size={size}
               style={style}
-              value={input.value === '' ? selectValue : input.value}
               {...mode}
             />
             {info}
