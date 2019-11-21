@@ -10,6 +10,7 @@ class AjaxSelect extends React.PureComponent {
     per: 20,
     style: {},
     renderOption: undefined,
+    selectValue: undefined,
   }
 
   static propTypes = {
@@ -18,13 +19,16 @@ class AjaxSelect extends React.PureComponent {
     options: PropTypes.array,
     renderOption: PropTypes.func,
     style: PropTypes.object,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
   }
 
   state = {
     loading: false,
     mounted: false,
     options: [],
+    selectValue: undefined,
+    page: 1,
+    per: 20,
   }
 
   componentDidMount() {
@@ -35,7 +39,23 @@ class AjaxSelect extends React.PureComponent {
     this.setState({ mounted: false })
   }
 
-  // TODO: Add handleScroll
+  handleScroll = async e => {
+    const { scrollHeight, clientHeight, scrollTop } = e.target
+    let scrollPage = this.state.page
+
+    try {
+      if (scrollTop + clientHeight >= scrollHeight - 1) {
+        this.setState({ page: scrollPage + 1 })
+        this.handleSearch('')
+      }
+    } catch (error) {
+      console.error(error)
+      notification.error({
+        message: `Oops! There was an error loading additional options`,
+        details: error.toString(),
+      })
+    }
+  }
 
   handleSearch = async value => {
     const { onSearch } = this.props
@@ -56,6 +76,12 @@ class AjaxSelect extends React.PureComponent {
     }
   }
 
+  handleChange = async (val, callBack) => {
+    //handle input onChange before setting state
+    callBack(val)
+    this.setState({ selectValue: val })
+  }
+
   render() {
     const {
       onChange,
@@ -65,7 +91,7 @@ class AjaxSelect extends React.PureComponent {
       style,
       value,
     } = this.props
-    const { loading, options } = this.state
+    const { loading, options, selectValue } = this.state
 
     return (
       <Select
@@ -73,13 +99,13 @@ class AjaxSelect extends React.PureComponent {
         loading={loading}
         filterOption={false}
         onDropdownVisibleChange={() => {}}
-        onChange={onChange}
-        // onPopupScroll={this.handleScroll}
+        onChange={val => this.handleChange(val, onChange)}
+        onPopupScroll={e => this.handleScroll(e)}
         onSearch={debounce(this.handleSearch, 500)}
         placeholder={placeholder}
         showSearch
         style={style}
-        value={value}
+        value={value === '' ? selectValue : value}
       >
         {options.map(option => renderOption(option))}
       </Select>
