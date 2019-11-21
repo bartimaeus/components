@@ -90,10 +90,7 @@ const FormItem = ({
 
   // Add conditionl validation props
   const validationProps = (() => {
-    if (
-      required &&
-      (!input.value && input.value !== 0 && isEmpty(input.value))
-    ) {
+    if (required && !input.value && input.value !== 0 && isEmpty(input.value)) {
       return {
         hasFeedback: true,
         validateStatus: 'warning',
