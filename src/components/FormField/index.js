@@ -60,6 +60,7 @@ const FormField = ({
   parser,
   placeholder,
   prefix,
+  radioOptionStyle,
   renderOption,
   required,
   resetTrigger,
@@ -202,6 +203,7 @@ const FormField = ({
                 <Radio
                   key={option.value || option.id}
                   value={option.value || option.id}
+                  style={radioOptionStyle || { marginBottom: 10 }}
                 >
                   {option.label || option.name}
                 </Radio>
@@ -398,6 +400,7 @@ FormField.defaultProps = {
   parser: undefined,
   placeholder: null,
   prefix: null,
+  radioOptionStyle: {},
   renderOption: undefined,
   required: undefined,
   resetTrigger: undefined,
@@ -459,6 +462,8 @@ FormField.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   prefix: PropTypes.node,
+  /** */
+  radioOptionStyle: PropTypes.object,
   /** */
   renderOption: PropTypes.func,
   /** */

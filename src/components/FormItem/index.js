@@ -59,6 +59,7 @@ const FormItem = ({
 }) => {
   const klassName = classNames(className, {
     'is-checkbox': input.type === 'checkbox' || type === 'checkbox',
+    'label-top': labelTop,
   })
   // Set defaults that can be overridden
   const formItemLayout = (() => {

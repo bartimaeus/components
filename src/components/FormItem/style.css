@@ -21,3 +21,12 @@
 .ant-form-item.ant-form-item-no-margin {
   margin: 0;
 }
+
+.ant-form-item.label-top .has-success.has-feedback .ant-form-item-children-icon,
+.ant-form-item.label-top .has-warning.has-feedback .ant-form-item-children-icon,
+.ant-form-item.label-top .has-error.has-feedback .ant-form-item-children-icon,
+.ant-form-item.label-top
+  .is-validating.has-feedback
+  .ant-form-item-children-icon {
+  top: 82%;
+}
