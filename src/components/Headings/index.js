@@ -2,7 +2,12 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 export const H1 = styled.h1``
-export const H2 = styled.h2``
+export const H2 = styled.h2`
+  display: flex;
+  font-weight: bold;
+  justify-content: space-between;
+  margin-bottom: 30px;
+`
 export const H3 = styled.h3`
   border-bottom: 1px solid #ddd;
   color: #337ab7;
