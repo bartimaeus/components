@@ -411,9 +411,9 @@ FormField.defaultProps = {
 
 FormField.propTypes = {
   /** The label text displayed after (on the right side of) the input field. */
-  addonAfter: PropTypes.node,
+  addonAfter: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** The label text displayed before (on the left side of) the input field. */
-  addonBefore: PropTypes.node,
+  addonBefore: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** Show clear button when type is 'select'. */
   allowSearch: PropTypes.bool,
   /** Allow Select to fetch options dynamically through onSearch function. */

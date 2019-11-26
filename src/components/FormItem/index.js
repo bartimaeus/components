@@ -28,6 +28,8 @@ const Label = ({ children, ...restProps }) => (
 
 // Ant Design's FormItem
 const FormItem = ({
+  addonAfter,
+  addonBefore,
   allowSearch,
   className,
   disabled,
@@ -116,6 +118,8 @@ const FormItem = ({
     >
       {!noLabel && labelTop && <Label style={labelStyle}>{label}</Label>}
       <FormField
+        addonAfter={addonAfter}
+        addonBefore={addonBefore}
         allowSearch={allowSearch}
         className={klassName}
         disabled={disabled}
@@ -142,6 +146,8 @@ const FormItem = ({
 }
 
 FormItem.defaultProps = {
+  addonAfter: undefined,
+  addonBefore: undefined,
   allowSearch: false,
   className: undefined,
   disabled: undefined,
@@ -170,6 +176,8 @@ FormItem.defaultProps = {
 }
 
 FormItem.propTypes = {
+  addonAfter: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  addonBefore: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   allowSearch: PropTypes.bool,
   className: PropTypes.string,
   disabled: PropTypes.bool,
