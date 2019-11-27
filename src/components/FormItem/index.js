@@ -13,11 +13,11 @@ import FormField from '../FormField'
 
 const LabelWrapper = styled.div`
   display: ${props => get(props, 'style.display', 'block')};
-  line-height: normal;
   label {
     font-weight: ${props => get(props, 'style.fontWeight', 'bold')};
     margin-top: ${props => get(props, 'style.marginTop', '15px')};
     margin-bottom: ${props => get(props, 'style.marginBottom', '4px')};
+    margin-left: ${props => get(props, 'style.marginLeft', '2px')};
   }
 `
 const Label = ({ children, ...restProps }) => (
