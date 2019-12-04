@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
 import { Select } from 'antd'
+import get from 'lodash/get'
 
 import FormField from './index'
 // import PrettyProps from '../PrettyProps'
@@ -304,18 +305,19 @@ If `type` is not specicied the default component returned from `FormField` is a 
       <Form
         initialValues={initialValues}
         onSubmit={() => {}}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <Field
               component={FormField}
               name="numberOfKids"
               options={[
+                { value: 0, label: 'zero' },
                 { value: 1, label: 'one' },
                 { value: 2, label: 'two' },
                 { value: 3, label: 'three' },
               ]}
-              type="checkbox"
-              checkboxType="radio"
+              type="radio"
+              value={get(values, "numberOfKids")}
             />
           </form>
         )}
@@ -334,18 +336,21 @@ If `type` is not specicied the default component returned from `FormField` is a 
       <Form
         initialValues={initialValues}
         onSubmit={() => {}}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <Field
               component={FormField}
               name="levelOfPain"
               options={[
-                { value: 1, label: 'Meh' },
-                { value: 2, label: 'So, so' },
-                { value: 3, label: '@#$%' },
+                {  value: 0, label: 'Meh' },
+                {  value: 2, label: 'So, so' },
+                {  value: 3, label: '@#$%' },
               ]}
-              type="rating"
+              radioType="yes_no"
+              type="custom-radio"
+              value={values.levelOfPain}
             />
+            <pre>{JSON.stringify(values, 0, 4)}</pre>
           </form>
         )}
       />
@@ -370,6 +375,7 @@ If `type` is not specicied the default component returned from `FormField` is a 
               name="bestPizza"
               placeholder="Select a food"
               options={[
+                { id: '0',value: 0, label: 'stiff' },
                 { value: 1, label: 'Dominos' },
                 { value: 2, label: 'Pizza Hut' },
                 { value: 3, label: 'Little Caesars' },
