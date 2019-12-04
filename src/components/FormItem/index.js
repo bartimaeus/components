@@ -52,7 +52,6 @@ const FormItem = ({
   placeholder,
   prefix,
   radioOptionStyle,
-  radioType,
   required,
   size,
   style,
@@ -139,7 +138,6 @@ const FormItem = ({
         prefix={prefix}
         size={size}
         style={style}
-        radioType={radioType}
         radioOptionStyle={radioOptionStyle}
         required={required}
         type={type}
@@ -171,7 +169,6 @@ FormItem.defaultProps = {
   options: null,
   placeholder: null,
   prefix: null,
-  radioType: undefined,
   radioOptionStyle: {},
   required: undefined,
   size: undefined,
@@ -226,8 +223,6 @@ FormItem.propTypes = {
   prefix: PropTypes.node,
   /** */
   radioOptionStyle: PropTypes.object,
-  /** */
-  radioType: PropTypes.string,
   /** */
   required: PropTypes.bool,
   /** */

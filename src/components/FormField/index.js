@@ -14,7 +14,6 @@ import moment from 'moment'
 import styled from '@emotion/styled'
 import 'antd/dist/antd.css'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import RadioGroup from '../RadioGroup'
 
 // Helpers
 import normalizePhone from '../../lib/normalize-phone'
@@ -61,7 +60,6 @@ const FormField = ({
   placeholder,
   prefix,
   radioOptionStyle,
-  radioType,
   renderOption,
   required,
   resetTrigger,
@@ -195,34 +193,7 @@ const FormField = ({
           {info}
         </>
       )
-    case 'radio':
-      if (radioType === 'rating') {
-        console.log(input.value)
-        console.log('valu', value)
-        return (
-          <Radio.Group
-            {...input}
-            buttonStyle="solid"
-            disabled={disabled}
-            style={{
-              minWidth: 650,
-              width: '100%',
-              textAlign: 'center',
-              ...style,
-            }}
-          >
-            {options.map(option => (
-              <Radio.Button
-                key={`${input.name}-${option.value || option.id}`}
-                style={{ width: `${100 / options.length}%` }}
-                value={option.value === 0 ? 0 : option.value || option.id}
-              >
-                {option.label}
-              </Radio.Button>
-            ))}
-          </Radio.Group>
-        )
-      }
+    case 'radio-group':
       return (
         <Radio.Group {...input} disabled={disabled} style={style}>
           {options.map(option => {
@@ -254,7 +225,7 @@ const FormField = ({
           {options.map(option => (
             <Radio.Button
               key={`${input.name}-${option.value || option.id}`}
-              style={{ width: `${100 / options.length}%` }}
+              style={{ ...radioOptionStyle, width: `${100 / options.length}%` }}
               value={option.value === 0 ? 0 : option.value || option.id}
             >
               {option.label}
@@ -376,18 +347,6 @@ const FormField = ({
           </Radio.Button>
         </Radio.Group>
       )
-    case 'custom-radio':
-      return (
-        <RadioGroup
-          disabled={disabled}
-          input={input}
-          options={options}
-          radioOptionStyle={radioOptionStyle}
-          radioType={radioType}
-          style={{ style }}
-          type={fieldType}
-        />
-      )
     default:
       return (
         <>
@@ -437,7 +396,6 @@ FormField.defaultProps = {
   parser: undefined,
   placeholder: null,
   prefix: null,
-  radioType: undefined,
   radioOptionStyle: {},
   renderOption: undefined,
   required: undefined,
@@ -498,8 +456,6 @@ FormField.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   prefix: PropTypes.node,
-  /** */
-  radioType: PropTypes.string,
   /** */
   radioOptionStyle: PropTypes.object,
   /** */

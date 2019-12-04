@@ -127,15 +127,7 @@ Add prop `noLabel`
         render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <Field component={FormItem} name="first_name" noLabel type="text" />
-            <Field component={FormItem} name="last_name" noLabel type="radio" options={[
-                { id: '0',value: 0, label: 'stiff' },
-                { value: 1, label: 'Dominos' },
-                { value: 2, label: 'Pizza Hut' },
-                { value: 3, label: 'Little Caesars' },
-                { value: 4, label: 'The Pie Pizzeria' },
-              ]} radioType="rating"
-              value={get(values, "last_name")}/>
-              <pre>{JSON.stringify(values, 0, 4)}</pre>
+            <Field component={FormItem} name="last_name" noLabel type="text" />
           </form>
         )}
       />
