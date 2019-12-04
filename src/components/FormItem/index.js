@@ -51,6 +51,8 @@ const FormItem = ({
   options,
   placeholder,
   prefix,
+  radioOptionStyle,
+  radioType,
   required,
   size,
   style,
@@ -137,6 +139,8 @@ const FormItem = ({
         prefix={prefix}
         size={size}
         style={style}
+        radioType={radioType}
+        radioOptionStyle={radioOptionStyle}
         required={required}
         type={type}
         {...restProps}
@@ -167,6 +171,8 @@ FormItem.defaultProps = {
   options: null,
   placeholder: null,
   prefix: null,
+  radioType: undefined,
+  radioOptionStyle: {},
   required: undefined,
   size: undefined,
   style: {},
@@ -176,32 +182,63 @@ FormItem.defaultProps = {
 }
 
 FormItem.propTypes = {
+  /** */
   addonAfter: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   addonBefore: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   allowSearch: PropTypes.bool,
+  /** */
   className: PropTypes.string,
+  /** */
   disabled: PropTypes.bool,
+  /** */
   info: PropTypes.node,
+  /** */
   help: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   input: PropTypes.object.isRequired,
+  /** */
   inputType: PropTypes.string,
+  /** */
   itemLayout: PropTypes.object,
+  /** */
   label: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+  /** */
   labelTop: PropTypes.bool,
+  /** */
   max: PropTypes.number,
+  /** */
   meta: PropTypes.object,
+  /** */
   min: PropTypes.number,
+  /** */
   multiSelect: PropTypes.bool,
+  /** */
   noLabel: PropTypes.bool,
+  /** */
   onChange: PropTypes.func,
+  /** */
   options: PropTypes.any,
+  /** */
   placeholder: PropTypes.string,
+  /** */
   prefix: PropTypes.node,
+  /** */
+  radioOptionStyle: PropTypes.object,
+  /** */
+  radioType: PropTypes.string,
+  /** */
   required: PropTypes.bool,
+  /** */
   size: PropTypes.string,
+  /** */
   style: PropTypes.object,
+  /** */
   type: PropTypes.string,
+  /** */
   validateHelp: PropTypes.string,
+  /** */
   validateStatus: PropTypes.string,
 }
 
