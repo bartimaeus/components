@@ -62,7 +62,6 @@ const FormField = ({
   radioOptionStyle,
   renderOption,
   required,
-  resetTrigger,
   size,
   style,
   type,
@@ -399,7 +398,6 @@ FormField.defaultProps = {
   radioOptionStyle: {},
   renderOption: undefined,
   required: undefined,
-  resetTrigger: undefined,
   size: undefined,
   style: {},
   type: 'text',
@@ -462,8 +460,6 @@ FormField.propTypes = {
   renderOption: PropTypes.func,
   /** */
   required: PropTypes.bool,
-  /** */
-  resetTrigger: PropTypes.any,
   /** */
   size: PropTypes.string,
   /** */
