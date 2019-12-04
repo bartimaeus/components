@@ -14,6 +14,7 @@ import moment from 'moment'
 import styled from '@emotion/styled'
 import 'antd/dist/antd.css'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import RadioGroup from '../RadioGroup'
 
 // Helpers
 import normalizePhone from '../../lib/normalize-phone'
@@ -39,7 +40,6 @@ const FormField = ({
   allowSearch,
   ajaxSelect,
   autoSize,
-  checkboxType,
   className,
   disabled,
   formatter,
@@ -61,6 +61,7 @@ const FormField = ({
   placeholder,
   prefix,
   radioOptionStyle,
+  radioType,
   renderOption,
   required,
   resetTrigger,
@@ -70,7 +71,7 @@ const FormField = ({
 }) => {
   const handleChange = onChange || input.onChange
   const { value } = input
-  const fieldType = checkboxType || input.type || type
+  const fieldType = input.type || type
   const [selectValue, setSelectValue] = useState()
 
   switch (fieldType) {
@@ -195,22 +196,47 @@ const FormField = ({
         </>
       )
     case 'radio':
-      return (
-        <>
-          <Radio.Group {...input} disabled={disabled} style={style}>
-            {options.map(option => {
-              return (
-                <Radio
-                  key={option.value || option.id}
-                  value={option.value || option.id}
-                  style={radioOptionStyle || { marginBottom: 10 }}
-                >
-                  {option.label || option.name}
-                </Radio>
-              )
-            })}
+      if (radioType === 'rating') {
+        console.log(input.value)
+        console.log('valu', value)
+        return (
+          <Radio.Group
+            {...input}
+            buttonStyle="solid"
+            disabled={disabled}
+            style={{
+              minWidth: 650,
+              width: '100%',
+              textAlign: 'center',
+              ...style,
+            }}
+          >
+            {options.map(option => (
+              <Radio.Button
+                key={`${input.name}-${option.value || option.id}`}
+                style={{ width: `${100 / options.length}%` }}
+                value={option.value === 0 ? 0 : option.value || option.id}
+              >
+                {option.label}
+              </Radio.Button>
+            ))}
           </Radio.Group>
-        </>
+        )
+      }
+      return (
+        <Radio.Group {...input} disabled={disabled} style={style}>
+          {options.map(option => {
+            return (
+              <Radio
+                key={`${input.name}-${option.value || option.id}`}
+                style={radioOptionStyle || { marginBottom: 10 }}
+                value={option.value === 0 ? 0 : option.value || option.id}
+              >
+                {option.label || option.name}
+              </Radio>
+            )
+          })}
+        </Radio.Group>
       )
     case 'rating':
       return (
@@ -229,7 +255,7 @@ const FormField = ({
             <Radio.Button
               key={`${input.name}-${option.value || option.id}`}
               style={{ width: `${100 / options.length}%` }}
-              value={option.value || option.id}
+              value={option.value === 0 ? 0 : option.value || option.id}
             >
               {option.label}
             </Radio.Button>
@@ -291,8 +317,8 @@ const FormField = ({
           >
             {options.map(option => (
               <Option
-                key={option.value || option.id}
-                value={option.value || option.id}
+                key={option.id || option.value}
+                value={option.value === 0 ? 0 : option.value || option.id}
               >
                 {option.label || option.name}
               </Option>
@@ -350,6 +376,18 @@ const FormField = ({
           </Radio.Button>
         </Radio.Group>
       )
+    case 'custom-radio':
+      return (
+        <RadioGroup
+          disabled={disabled}
+          input={input}
+          options={options}
+          radioOptionStyle={radioOptionStyle}
+          radioType={radioType}
+          style={{ style }}
+          type={fieldType}
+        />
+      )
     default:
       return (
         <>
@@ -380,7 +418,6 @@ FormField.defaultProps = {
   allowSearch: false,
   ajaxSelect: false,
   autoSize: false,
-  checkboxType: undefined,
   className: undefined,
   disabled: false,
   formatter: undefined,
@@ -400,6 +437,7 @@ FormField.defaultProps = {
   parser: undefined,
   placeholder: null,
   prefix: null,
+  radioType: undefined,
   radioOptionStyle: {},
   renderOption: undefined,
   required: undefined,
@@ -420,8 +458,6 @@ FormField.propTypes = {
   ajaxSelect: PropTypes.bool,
   /** */
   autoSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  /** */
-  checkboxType: PropTypes.string,
   /** */
   className: PropTypes.string,
   /** */
@@ -462,6 +498,8 @@ FormField.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   /** */
   prefix: PropTypes.node,
+  /** */
+  radioType: PropTypes.string,
   /** */
   radioOptionStyle: PropTypes.object,
   /** */
