@@ -39,7 +39,6 @@ const FormField = ({
   allowSearch,
   ajaxSelect,
   autoSize,
-  checkboxType,
   className,
   disabled,
   formatter,
@@ -70,7 +69,7 @@ const FormField = ({
 }) => {
   const handleChange = onChange || input.onChange
   const { value } = input
-  const fieldType = checkboxType || input.type || type
+  const fieldType = input.type || type
   const [selectValue, setSelectValue] = useState()
 
   switch (fieldType) {
@@ -194,23 +193,21 @@ const FormField = ({
           {info}
         </>
       )
-    case 'radio':
+    case 'radio-group':
       return (
-        <>
-          <Radio.Group {...input} disabled={disabled} style={style}>
-            {options.map(option => {
-              return (
-                <Radio
-                  key={option.value || option.id}
-                  value={option.value || option.id}
-                  style={radioOptionStyle || { marginBottom: 10 }}
-                >
-                  {option.label || option.name}
-                </Radio>
-              )
-            })}
-          </Radio.Group>
-        </>
+        <Radio.Group {...input} disabled={disabled} style={style}>
+          {options.map(option => {
+            return (
+              <Radio
+                key={`${input.name}-${option.value || option.id}`}
+                style={radioOptionStyle || { marginBottom: 10 }}
+                value={option.value === 0 ? 0 : option.value || option.id}
+              >
+                {option.label || option.name}
+              </Radio>
+            )
+          })}
+        </Radio.Group>
       )
     case 'rating':
       return (
@@ -228,8 +225,8 @@ const FormField = ({
           {options.map(option => (
             <Radio.Button
               key={`${input.name}-${option.value || option.id}`}
-              style={{ width: `${100 / options.length}%` }}
-              value={option.value || option.id}
+              style={{ ...radioOptionStyle, width: `${100 / options.length}%` }}
+              value={option.value === 0 ? 0 : option.value || option.id}
             >
               {option.label}
             </Radio.Button>
@@ -291,8 +288,8 @@ const FormField = ({
           >
             {options.map(option => (
               <Option
-                key={option.value || option.id}
-                value={option.value || option.id}
+                key={option.id || option.value}
+                value={option.value === 0 ? 0 : option.value || option.id}
               >
                 {option.label || option.name}
               </Option>
@@ -380,7 +377,6 @@ FormField.defaultProps = {
   allowSearch: false,
   ajaxSelect: false,
   autoSize: false,
-  checkboxType: undefined,
   className: undefined,
   disabled: false,
   formatter: undefined,
@@ -420,8 +416,6 @@ FormField.propTypes = {
   ajaxSelect: PropTypes.bool,
   /** */
   autoSize: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  /** */
-  checkboxType: PropTypes.string,
   /** */
   className: PropTypes.string,
   /** */

@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
 import { Form, Field } from 'react-final-form'
-import isEmpty from 'lodash/isEmpty'
+import {get,isEmpty} from 'lodash'
 
 import FormItem from './index'
 import { initialValues } from './formItem.example'
@@ -124,7 +124,7 @@ Add prop `noLabel`
       <Form
         initialValues={initialValues}
         onSubmit={() => {}}
-        render={({ handleSubmit }) => (
+        render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <Field component={FormItem} name="first_name" noLabel type="text" />
             <Field component={FormItem} name="last_name" noLabel type="text" />
